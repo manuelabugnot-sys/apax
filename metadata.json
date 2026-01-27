@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Copy of Apax Management - HR Solutions",
+  "description": "A high-end corporate landing page for a HR consulting firm, featuring strategic talent solutions, team showcases, and interactive AI-powered labs.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
