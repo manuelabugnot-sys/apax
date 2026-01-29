@@ -1,16 +1,45 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apax Management | Soluciones Estratégicas de RRHH</title>
+    <title>Apax Management | Soluciones Estratégicas</title>
     
-    <link rel="icon" type="image/png" href="/logo-color.png" /> <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  </head>
-  <body class="font-sans text-slate-900 bg-background-light dark:bg-background-dark">
-    <div id="root"></div>
+    <link rel="icon" type="image/png" href="/logo-color.png" />
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet" />
 
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0a008a",
+              secondary: "#020617",
+              accent: "#9d4edd",
+              magenta: "#9d4edd",
+              navy: "#0a008a",
+              "background-light": "#fdfdff",
+              "background-dark": "#020617",
+            }
+          }
+        }
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .gradient-text-magenta {
+          background: linear-gradient(135deg, #0a008a 0%, #9d4edd 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
