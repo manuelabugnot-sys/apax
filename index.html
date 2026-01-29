@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apax Management | Soluciones Estratégicas de RRHH</title>
-    <link id="favicon-link" rel="icon" type="image/png" href="/public/logo-color.png" />
+    
+    <link id="favicon-link" rel="icon" type="image/png" href="/logo-color.png" />
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
@@ -56,4 +58,61 @@
           -webkit-text-fill-color: transparent;
         }
         .hero-pattern {
-          background-image: radial-gradient(circle at 2px 2px, rgba(10, 0, 138, 0.05) 1px, transparent
+          background-image: radial-gradient(circle at 2px 2px, rgba(10, 0, 138, 0.05) 1px, transparent 0);
+          background-size: 32px 32px;
+        }
+        .btn-gradient {
+          background: linear-gradient(135deg, #0a008a 0%, #9d4edd 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #e2e8f0;
+          border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #334155;
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slowZoom {
+          from { transform: scale(1); }
+          to { transform: scale(1.1); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        .animate-scale-up { animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slow-zoom { animation: slowZoom 20s ease-in-out infinite alternate; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+  }
+}
+</script>
+</head>
+  <body class="font-sans text-slate-900 bg-background-light dark:bg-background-dark dark:text-slate-100 transition-colors duration-300">
+    <div id="root"></div>
+
+    <script type="module
