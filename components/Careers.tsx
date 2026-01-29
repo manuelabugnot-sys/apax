@@ -50,7 +50,7 @@ const Careers: React.FC = () => {
   const inputClasses = "w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 outline-none transition-all duration-300 placeholder:text-slate-400 text-slate-900 dark:text-white focus:scale-[1.02] focus:border-primary dark:focus:border-accent focus:ring-4 focus:ring-primary/10 dark:focus:ring-accent/10 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed";
 
   return (
-    <section className="py-12 bg-white dark:bg-slate-950 border-y border-slate-100 dark:border-white/5 overflow-hidden relative group transition-colors duration-300">
+    <section id="talento" className="py-12 bg-white dark:bg-slate-950 border-y border-slate-100 dark:border-white/5 overflow-hidden relative group transition-colors duration-300 scroll-mt-20">
       
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="bg-gradient-to-br from-navy via-purple-700 to-magenta rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl transition-all hover:shadow-magenta/25 border border-white/10">
@@ -62,7 +62,7 @@ const Careers: React.FC = () => {
           <div className="text-center md:text-left relative z-10 max-w-3xl">
              <div className="inline-flex items-center justify-center md:justify-start gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-black uppercase tracking-widest mb-6 backdrop-blur-md shadow-lg">
                 <span className="material-symbols-outlined text-sm">groups</span>
-                Red de Talentos
+                Talento Apax
              </div>
              <h3 className="text-2xl md:text-4xl font-display font-bold text-white mb-4 leading-tight">
                ¿Buscas tu próximo desafío profesional?
@@ -100,7 +100,7 @@ const Careers: React.FC = () => {
                 <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white mx-auto mb-6 border border-white/20 shadow-lg">
                     <span className="material-symbols-outlined text-4xl">person_add</span>
                 </div>
-                <h3 className="text-3xl font-bold mb-2">Únete a nuestra Red de Talentos</h3>
+                <h3 className="text-3xl font-bold mb-2">Únete a Talento Apax</h3>
                 <p className="text-white/90 max-w-xl mx-auto">
                     Complete el formulario y adjunte su CV. Nuestro equipo de selección analizará su perfil para oportunidades que coincidan con su experiencia.
                 </p>

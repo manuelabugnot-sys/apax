@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Hero: React.FC = () => {
@@ -38,7 +37,7 @@ const Hero: React.FC = () => {
             Ofrecemos soluciones estratégicas de RRHH que conecten los objetivos organizacionales con la excelencia del equipo.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-wrap gap-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <button 
               onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
               className="btn-gradient text-white px-10 py-5 rounded-full text-lg font-bold shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
@@ -52,6 +51,15 @@ const Hero: React.FC = () => {
               className="bg-white/60 dark:bg-white/10 backdrop-blur-md border border-slate-200 dark:border-white/10 px-10 py-5 rounded-full text-lg font-bold hover:bg-white dark:hover:bg-white/20 transition-all text-slate-700 dark:text-white shadow-sm"
             >
               Ver Soluciones
+            </button>
+
+             {/* Botón Talento Apax */}
+            <button 
+              onClick={() => document.getElementById('talento')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-transparent border border-primary/20 dark:border-white/20 px-8 py-5 rounded-full text-lg font-bold hover:bg-primary/5 dark:hover:bg-white/5 transition-all text-primary dark:text-white flex items-center justify-center gap-2 group"
+            >
+              <span className="material-symbols-outlined group-hover:text-magenta transition-colors">groups</span>
+              Talento Apax
             </button>
           </div>
         </div>
