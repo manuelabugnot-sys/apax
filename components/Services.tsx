@@ -95,6 +95,12 @@ const servicesData: ServiceDetail[] = [
           description: "Diseño de procesos de Evaluación de Desempeño (OKRs, 9-Box). Pasamos de la evaluación anual al feedback continuo."
         },
         { 
+          name: "Diversidad e Inclusión (D&I)", 
+          colorClass: "from-indigo-500 to-purple-600 shadow-indigo-500/20",
+          icon: "diversity_3",
+          description: "Diseñamos estrategias de inclusión que fomenten entornos de trabajo equitativos y diversos, potenciando la innovación a través de la multiplicidad de perspectivas."
+        },
+        { 
           name: "Employee Experience (EX)", 
           colorClass: "from-rose-500 to-orange-500 shadow-rose-500/20",
           icon: "favorite",
@@ -126,7 +132,6 @@ const servicesData: ServiceDetail[] = [
     img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Alineamos su arquitectura de RRHH con los objetivos de negocio. Transformamos la estructura organizacional para que sea ágil, eficiente y humana. No somos solo asesores; somos socios estratégicos que implementan cambios con impacto directo en el balance de la empresa.",
     methodology: [
-      "Auditoría de Cumplimiento Normativo (Compliance).",
       "Reingeniería de Procesos de Negocio (BPR).",
       "Análisis de Estructuras Organizativas.",
       "Planificación Estratégica de Workforce."
