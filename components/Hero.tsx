@@ -4,14 +4,14 @@ const Hero: React.FC = () => {
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden scroll-mt-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div className="absolute inset-0 z-0">
-        {/* Imagen de Equipo */}
+        {/* Imagen de Equipo - Ajustada opacidad en dark mode */}
         <img 
           alt="Strategic Team Collaboration" 
-          className="w-full h-full object-cover scale-105 animate-slow-zoom [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_60%)] dark:opacity-60 transition-opacity duration-300" 
+          className="w-full h-full object-cover scale-105 animate-slow-zoom [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_60%)] dark:opacity-75 transition-opacity duration-300" 
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070"
         />
-        {/* Gradiente Adaptativo: Claro en Light Mode / Oscuro en Dark Mode */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent dark:from-slate-950 dark:via-slate-950/90 dark:to-transparent z-10 transition-colors duration-300"></div>
+        {/* Gradiente Adaptativo: Aclarado un poco el modo oscuro usando slate-900 en lugar de 950 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent dark:from-slate-900/95 dark:via-slate-900/80 dark:to-transparent z-10 transition-colors duration-300"></div>
       </div>
 
       {/* Padding superior ajustado y padding inferior agregado (pb-24 md:pb-32) para espacio en los botones */}
