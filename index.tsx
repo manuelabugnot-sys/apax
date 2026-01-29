@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx'; // <--- El .tsx es fundamental acá
+import App from './App.tsx'; // Importante el .tsx
 
 const rootElement = document.getElementById('root');
-
-if (!rootElement) {
-  throw new Error("No se pudo encontrar el elemento root para montar la app");
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 }
-
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
