@@ -206,11 +206,11 @@ const Careers: React.FC = () => {
                             {status === 'submitting' ? (
                                 <>
                                     <span className="animate-spin material-symbols-outlined">progress_activity</span>
-                                    Enviando Postulación...
+                                    Enviando...
                                 </>
                             ) : (
                                 <>
-                                    Enviar Postulación
+                                    Enviar
                                     <span className="material-symbols-outlined">send</span>
                                 </>
                             )}

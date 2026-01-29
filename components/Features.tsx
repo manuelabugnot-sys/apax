@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 
 const CountUp: React.FC<{ end: number; duration: number }> = ({ end, duration }) => {
@@ -57,7 +56,7 @@ const Features: React.FC = () => {
     {
       icon: 'diversity_2',
       title: 'Equipo Multidisciplinario',
-      desc: 'Expertos en administración de RRHH y relaciones del trabajo dedicados a optimizar la rentabilidad del capital humano con visión regional.',
+      desc: 'Expertos en administración de RRHH y relaciones del trabajo dedicados a maximizar el valor estratégico de sus equipos.',
       color: 'magenta'
     },
     {

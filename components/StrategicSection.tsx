@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const StrategicSection: React.FC = () => {
@@ -14,7 +13,7 @@ const StrategicSection: React.FC = () => {
                 Nuestra consultoría no se limita a la asesoría técnica; nos convertimos en arquitectos de la estructura organizacional. Analizamos cada capa de su empresa para identificar cuellos de botella y oportunidades de optimización.
               </p>
               <p>
-                Implementamos soluciones de <strong>Change Management</strong> y rediseño de procesos que aseguran que su capital humano sea el motor que impulse el crecimiento del negocio hacia adelante.
+                Implementamos soluciones de <strong>Change Management</strong> y rediseño de procesos que aseguran que su comunidad profesional sea el motor que impulse el crecimiento del negocio hacia adelante.
               </p>
               
               <div className="grid grid-cols-2 gap-4 pt-6">
