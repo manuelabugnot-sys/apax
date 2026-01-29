@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx'; // Asegurate de agregar el .tsx aquí si no usás compilador
+import App from './App.tsx'; // IMPORTANTE: Agregá el .tsx aquí
 
 const rootElement = document.getElementById('root');
 
