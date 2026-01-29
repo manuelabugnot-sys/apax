@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 export const BrandLogo: React.FC<{ className?: string, isFooter?: boolean }> = ({ 
@@ -120,8 +119,8 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
               onClick={(e) => handleScrollTo(e, 'inicio')}
               className="transition-all h-full flex items-center relative"
             >
-              {/* Logo ajustado: h-10 en móvil para que encaje, h-28 en escritorio para impacto visual */}
-              <BrandLogo className="h-10 md:h-28 w-auto transform origin-left transition-transform duration-500" />
+              {/* Logo ajustado: h-14 en móvil (grande) y h-28 en escritorio */}
+              <BrandLogo className="h-14 md:h-28 w-auto transform origin-left transition-transform duration-500" />
             </a>
           </div>
 

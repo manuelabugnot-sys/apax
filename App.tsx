@@ -12,15 +12,9 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import Careers from './components/Careers';
 
 const App: React.FC = () => {
+  // Inicializamos en false (Light Mode) por defecto y eliminamos el check del sistema
   const [darkMode, setDarkMode] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    // Check system preference on mount
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkMode(true);
-    }
-  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -28,7 +22,6 @@ const App: React.FC = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    // Nota: Se eliminó el cambio de favicon-link.href para que permanezca igual (el de color por defecto en index.html)
   }, [darkMode]);
 
   useEffect(() => {

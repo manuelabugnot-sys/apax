@@ -14,8 +14,8 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent dark:from-slate-950 dark:via-slate-950/90 dark:to-transparent z-10 transition-colors duration-300"></div>
       </div>
 
-      {/* Padding superior ajustado para evitar que el navbar tape el contenido. Ancho maximizado. */}
-      <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full pt-28 md:pt-40">
+      {/* Padding superior ajustado y padding inferior agregado (pb-24 md:pb-32) para espacio en los botones */}
+      <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full pt-28 md:pt-40 pb-24 md:pb-32">
         <div className="max-w-4xl">
           {/* Badge superior */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 dark:bg-white/10 backdrop-blur-md text-primary dark:text-accent font-bold text-sm mb-8 border border-primary/10 dark:border-white/10 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
