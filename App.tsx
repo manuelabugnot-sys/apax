@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -10,6 +9,7 @@ import AILab from './components/AILab';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import Careers from './components/Careers';
 
 const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -67,6 +67,9 @@ const App: React.FC = () => {
         
         {/* Soluciones Integrales */}
         <Services />
+
+        {/* Talent Network / Careers */}
+        <Careers />
         
         {/* Innovation Lab */}
         <AILab />
