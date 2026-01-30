@@ -1,112 +1,119 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apax Management | Soluciones Estratégicas de RRHH</title>
-    
-    <link rel="icon" type="image/png" href="/logo-color.png" />
-    
+    <!-- Favicon con ID para cambio dinámico -->
+    <link id="favicon-link" rel="icon" type="image/png" href="logo-color.png" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap" rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#0a008a",
-                        accent: "#9d4edd",
-                        magenta: "#9d4edd",
-                    },
-                    animation: {
-                        'shimmer': 'shimmer 3s infinite ease-in-out',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        shimmer: {
-                            '0%': { transform: 'translateX(-150%) skewX(-20deg)' },
-                            '100%': { transform: 'translateX(150%) skewX(-20deg)' },
-                        },
-                        fadeInUp: {
-                            'from': { opacity: '0', transform: 'translateY(20px)' },
-                            'to': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0a008a",
+              secondary: "#020617",
+              accent: "#9d4edd",
+              magenta: "#9d4edd",
+              navy: "#0a008a",
+              "background-light": "#fdfdff",
+              "background-dark": "#020617",
+            },
+            fontFamily: {
+              display: ["Plus Jakarta Sans", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
+              manrope: ["Manrope", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.75rem",
+            },
+            animation: {
+              'shimmer': 'shimmer 2s infinite linear',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              }
             }
-        };
+          },
+        },
+      };
     </script>
-
     <style type="text/tailwindcss">
-        @layer utilities {
-            .btn-gradient {
-                background: linear-gradient(135deg, #0a008a 0%, #9d4edd 100%);
-            }
-            .logo-shine-container {
-                position: relative;
-                overflow: hidden;
-            }
+      @layer utilities {
+        .gradient-text-magenta {
+          background: linear-gradient(135deg, #0a008a 0%, #9d4edd 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
+        .hero-pattern {
+          background-image: radial-gradient(circle at 2px 2px, rgba(10, 0, 138, 0.05) 1px, transparent 0);
+          background-size: 32px 32px;
+        }
+        .btn-gradient {
+          background: linear-gradient(135deg, #0a008a 0%, #9d4edd 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #e2e8f0;
+          border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #334155;
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slowZoom {
+          from { transform: scale(1); }
+          to { transform: scale(1.1); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        .animate-scale-up { animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slow-zoom { animation: slowZoom 20s ease-in-out infinite alternate; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+      }
     </style>
-
-    <script type="importmap">
-    {
-        "imports": {
-            "react": "https://esm.sh/react@19.0.0",
-            "react-dom": "https://esm.sh/react-dom@19.0.0",
-            "framer-motion": "https://esm.sh/framer-motion@11.11.11"
-        }
-    }
-    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0",
+    "react/": "https://esm.sh/react@19.0.0/",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/": "https://esm.sh/react-dom@19.0.0/",
+    "@google/genai": "https://esm.sh/@google/genai@1.38.0",
+    "framer-motion": "https://esm.sh/framer-motion@11.11.11?external=react,react-dom"
+  }
+}
+</script>
 </head>
-
-<body class="font-sans text-slate-900 bg-[#fdfdff] dark:bg-[#020617] dark:text-slate-100 transition-colors duration-300">
-    
-    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            
-            <div class="logo-shine-container group cursor-pointer">
-                <img src="/logo-color.png" alt="Apax Management" class="h-10 w-auto relative z-10" />
-                <div class="absolute inset-0 z-20 w-1/2 h-full bg-gradient-to-r from-transparent via-white/60 to-transparent animate-shimmer"></div>
-            </div>
-
-            <div class="hidden md:flex gap-8 items-center font-semibold">
-                <a href="#inicio" class="hover:text-magenta transition-colors">Inicio</a>
-                <a href="#servicios" class="hover:text-magenta transition-colors">Servicios</a>
-                <a href="#nosotros" class="hover:text-magenta transition-colors">Quiénes somos</a>
-                <button class="btn-gradient text-white px-6 py-2 rounded-full text-sm">Contacto</button>
-            </div>
-        </div>
-    </nav>
-
-    <section id="nosotros" class="pt-32 pb-20 px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-4xl font-extrabold mb-16">Nuestro Equipo</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="group">
-                    <div class="rounded-3xl overflow-hidden shadow-2xl mb-6 aspect-square grayscale hover:grayscale-0 transition-all duration-500">
-                        <img src="/manuela.jpg" alt="Manuela" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <h3 class="text-2xl font-bold text-primary dark:text-white">Manuela</h3>
-                    <p class="text-slate-500 font-medium">Co-Founder & Lead Consultant</p>
-                </div>
-
-                <div class="group">
-                    <div class="rounded-3xl overflow-hidden shadow-2xl mb-6 aspect-square grayscale hover:grayscale-0 transition-all duration-500">
-                        <img src="/giuli.jpg" alt="Giuli" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <h3 class="text-2xl font-bold text-primary dark:text-white">Giuli</h3>
-                    <p class="text-slate-500 font-medium">Co-Founder & HR Specialist</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+  <body class="font-sans text-slate-900 bg-background-light dark:bg-background-dark dark:text-slate-100 transition-colors duration-300">
     <div id="root"></div>
-
-</body>
+  </body>
 </html>
