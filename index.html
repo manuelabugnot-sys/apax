@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="utf-8" />
-    <title>Apax Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apax Management | RRHH</title>
     <link rel="icon" type="image/png" href="/logo-color.png" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -11,14 +13,14 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#0a008a",
+                        navy: "#0a008a",
                         magenta: "#9d4edd",
                     },
                     animation: {
-                        'shimmer': 'shimmer 2.5s infinite linear',
+                        'shine': 'shine 3s infinite',
                     },
                     keyframes: {
-                        shimmer: {
+                        shine: {
                             '0%': { transform: 'translateX(-100%)' },
                             '100%': { transform: 'translateX(100%)' }
                         }
@@ -28,38 +30,50 @@
         };
     </script>
 </head>
-<body class="bg-slate-50">
+<body class="bg-[#f8fafc] font-sans">
 
-    <nav class="bg-gradient-to-r from-[#1e1b4b] via-[#4338ca] to-[#7c3aed] p-4 flex items-center justify-between shadow-lg">
-        <div class="relative overflow-hidden group px-4 py-2">
+    <nav class="bg-gradient-to-r from-[#1e1b4b] via-[#4338ca] to-[#7c3aed] h-20 px-8 flex items-center justify-between shadow-xl fixed top-0 w-full z-50">
+        <div class="relative overflow-hidden group">
             <img src="/logo-color.png" alt="Apax" class="h-10 brightness-0 invert" />
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shine"></div>
         </div>
 
-        <div class="flex gap-6 text-white font-medium">
-            <a href="#" class="hover:opacity-80">Inicio</a>
-            <a href="#" class="hover:opacity-80">Quiénes somos</a>
-            <a href="#" class="hover:opacity-80">Equipo</a>
-            <a href="#" class="hover:opacity-80">Servicios</a>
+        <div class="hidden md:flex gap-8 text-white/90 font-semibold">
+            <a href="#" class="hover:text-white transition-colors">Inicio</a>
+            <a href="#" class="hover:text-white transition-colors">Quiénes somos</a>
+            <a href="#" class="hover:text-white transition-colors">Equipo</a>
+            <a href="#" class="hover:text-white transition-colors">Servicios</a>
         </div>
-        <button class="bg-white text-primary px-6 py-2 rounded-full font-bold hover:scale-105 transition-transform">
+
+        <button class="bg-white text-[#4338ca] px-8 py-2.5 rounded-full font-bold hover:scale-105 transition-all shadow-lg">
             Agendar Consultoría
         </button>
     </nav>
 
-    <section class="py-20 max-w-6xl mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-10">
-            <div class="bg-white p-6 rounded-3xl shadow-xl text-center">
-                <div class="rounded-2xl overflow-hidden h-80 mb-4">
+    <div class="h-32"></div>
+
+    <section class="max-w-6xl mx-auto px-6 py-12">
+        <h2 class="text-4xl font-black text-center text-navy mb-16 italic">Nuestro Equipo</h2>
+        
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="bg-white rounded-[2rem] p-4 shadow-2xl hover:-translate-y-2 transition-transform">
+                <div class="rounded-[1.5rem] overflow-hidden h-96 mb-6">
                     <img src="/manuela.jpg" alt="Manuela" class="w-full h-full object-cover" />
                 </div>
-                <h3 class="text-2xl font-bold text-primary italic">Manuela</h3>
+                <div class="text-center pb-4">
+                    <h3 class="text-3xl font-extrabold text-navy italic">Manuela</h3>
+                    <p class="text-magenta font-bold mt-2">Co-Founder</p>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-3xl shadow-xl text-center">
-                <div class="rounded-2xl overflow-hidden h-80 mb-4">
+
+            <div class="bg-white rounded-[2rem] p-4 shadow-2xl hover:-translate-y-2 transition-transform">
+                <div class="rounded-[1.5rem] overflow-hidden h-96 mb-6">
                     <img src="/giuli.jpg" alt="Giuli" class="w-full h-full object-cover" />
                 </div>
-                <h3 class="text-2xl font-bold text-primary italic">Giuli</h3>
+                <div class="text-center pb-4">
+                    <h3 class="text-3xl font-extrabold text-navy italic">Giuli</h3>
+                    <p class="text-magenta font-bold mt-2">Co-Founder</p>
+                </div>
             </div>
         </div>
     </section>
