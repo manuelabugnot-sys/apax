@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apax Management | Soluciones Estratégicas de RRHH</title>
     
-    <link id="favicon-link" rel="icon" type="image/png" href="logo-color.png" />
+    <link id="favicon-link" rel="icon" type="image/png" href="/logo-color.png" />
     
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -34,10 +34,15 @@
             animation: {
               'shimmer': 'shimmer 2s infinite linear',
               'float': 'float 6s ease-in-out infinite',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards', /* Agregada aquí también */
             },
             keyframes: {
               shimmer: { '0%': { transform: 'translateX(-100%)' }, '100%': { transform: 'translateX(100%)' } },
-              float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } }
+              float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+              fadeInUp: {
+                'from': { opacity: '0', transform: 'translateY(20px)' },
+                'to': { opacity: '1', transform: 'translateY(0)' }
+              }
             }
           },
         },
@@ -46,6 +51,14 @@
 
     <style type="text/tailwindcss">
       @layer utilities {
+        /* Definición crítica para que el texto aparezca */
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { 
+          animation: fadeInUp 0.8s ease-out forwards; 
+        }
         .gradient-text-magenta {
           background: linear-gradient(135deg, #0a008a 0%, #9d4edd 100%);
           -webkit-background-clip: text;
