@@ -5,7 +5,7 @@ const FloatingWhatsApp: React.FC = () => {
   return (
     <a 
       className="fixed bottom-10 right-10 w-16 h-16 bg-[#25d366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-50 group" 
-      href="https://wa.me/5491156023106" 
+      href="https://wa.me/5491178260450" 
       target="_blank" 
       rel="noopener noreferrer"
     >
