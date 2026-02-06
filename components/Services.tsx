@@ -32,17 +32,21 @@ const Services = () => {
   }, [selectedService]);
 
   return (
-    <section id="servicios" className="py-16 bg-white dark:bg-slate-950">
+    <section id="servicios" className="py-20 bg-white dark:bg-slate-950">
       <div className="max-w-6xl mx-auto px-6">
         
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-black text-[#1a008a] dark:text-white tracking-tighter mb-4">
+        {/* TÍTULO MÁS FINO Y ELEGANTE */}
+        <div className="text-center mb-16">
+          <div className="w-12 h-0.5 bg-[#1a008a] mb-8 rounded-full mx-auto opacity-50"></div>
+          <h2 className="text-4xl md:text-5xl font-light text-[#1a008a] dark:text-white tracking-tight leading-tight mb-6">
             Soluciones Integrales de RRHH
           </h2>
-          <p className="text-slate-500 font-medium">Click para explorar cada solución.</p>
+          <p className="text-base text-slate-500 font-normal max-w-xl mx-auto">
+            Click para explorar cada solución y descubrir nuestra propuesta diferencial.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8">
           {services.map((s) => (
             <div 
               key={s.id}
@@ -61,15 +65,10 @@ const Services = () => {
                 <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-lg flex items-center justify-center mb-4 border border-white/20">
                   <span className="material-symbols-outlined text-xl">{s.icon}</span>
                 </div>
-
-                {/* TÍTULO MÁS GRANDE */}
                 <h3 className="text-2xl font-extrabold mb-3 leading-tight tracking-tight">{s.title}</h3>
-                
-                {/* DESCRIPCIÓN MÁS GRANDE */}
                 <p className="text-base text-white/90 leading-snug line-clamp-3 font-semibold mb-4">
                   {s.desc}
                 </p>
-
                 <div className="mt-auto flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
                   Saber Más <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </div>
@@ -83,7 +82,7 @@ const Services = () => {
       {selectedService && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedService(null)}>
           <div className="bg-white dark:bg-slate-900 p-10 rounded-[2rem] max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
-            <h2 className="text-3xl font-black text-[#1a008a] mb-4">{(selectedService as any).title}</h2>
+            <h2 className="text-3xl font-light text-[#1a008a] mb-4">{(selectedService as any).title}</h2>
             <p className="text-lg text-slate-700 dark:text-slate-300 mb-8 font-medium">{(selectedService as any).desc}</p>
             <button 
               onClick={() => setSelectedService(null)}
