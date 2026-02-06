@@ -1,118 +1,49 @@
-import React, { useState, useEffect } from 'react';
+// ... (mismo código de interfaces y data)
 
-// ... (Mantenemos la interfaz BusinessUnit y ServiceDetail igual)
+const ServiceCard: React.FC<{
+  service: ServiceDetail;
+  onOpen: (service: ServiceDetail) => void;
+  featured?: boolean;
+}> = ({ service, onOpen, featured }) => (
+  <div 
+    onClick={() => onOpen(service)}
+    className={`group cursor-pointer relative h-full rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${featured ? 'md:scale-105 z-10' : ''}`}
+  >
+    <img 
+      alt={`${service.title} Background`} 
+      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+      src={service.img}
+    />
+    {/* AHORA COINCIDE CON TU NAVBAR: de Primary a Magenta */}
+    <div className="absolute inset-0 bg-gradient-to-br from-[#1a008a]/95 via-[#1a008a]/85 to-[#701a75]/80 opacity-95 group-hover:opacity-90 transition-opacity"></div>
+    
+    <div className="relative z-10 p-10 flex flex-col h-full text-white">
+      <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white mb-6 border border-white/20">
+        <span className="material-symbols-outlined text-3xl">{service.icon}</span>
+      </div>
+      <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+      <p className="text-white/90 mb-8 leading-relaxed line-clamp-3">
+        {service.fullDesc}
+      </p>
+      <div className="mt-auto inline-flex items-center gap-2 font-bold text-white group-hover:gap-4 transition-all">
+        Saber Más <span className="material-symbols-outlined">arrow_forward</span>
+      </div>
+    </div>
+  </div>
+);
 
 const Services: React.FC = () => {
-  const [selectedService, setSelectedService] = useState<any>(null);
-  const [activeUnit, setActiveUnit] = useState<any>(null);
-
-  useEffect(() => {
-    document.body.style.overflow = selectedService ? 'hidden' : 'auto';
-    if (!selectedService) setActiveUnit(null);
-  }, [selectedService]);
-
-  // Función para obtener el color exacto de la solución específica según la imagen
-  const getUnitColor = (name: string) => {
-    if (name.includes("IT")) return "from-cyan-400 to-cyan-600";
-    if (name.includes("Mandos")) return "from-emerald-400 to-emerald-600";
-    if (name.includes("Executive")) return "from-indigo-600 to-blue-700";
-    if (name.includes("RPO")) return "from-slate-700 to-slate-900";
-    if (name.includes("Semilleros")) return "from-rose-400 to-pink-500";
-    return "from-[#1a008a] to-blue-800"; // Default
-  };
+  // ... (mismos states y useEffect)
 
   return (
-    <section id="servicios" className="py-20 bg-white dark:bg-slate-950">
-      {/* ... (Grid de servicios principal igual) */}
-
-      {/* MODAL CON COLORES EN SOLUCIONES ESPECÍFICAS */}
-      {selectedService && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm" onClick={() => setSelectedService(null)}>
-          <div className="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-[2.5rem] overflow-hidden shadow-2xl relative flex flex-col md:flex-row" onClick={e => e.stopPropagation()}>
-            
-            {/* Lateral con Imagen */}
-            <div className="w-full md:w-1/3 bg-[#1a008a] relative h-48 md:h-auto shrink-0">
-              <img src={selectedService.img} className="w-full h-full object-cover opacity-50" alt="" />
-              <div className="absolute inset-0 flex flex-col items-center justify-end p-8 text-white">
-                 <h4 className="text-3xl font-bold leading-tight">{selectedService.title}</h4>
-              </div>
-            </div>
-
-            {/* Contenido */}
-            <div className="w-full md:w-2/3 p-8 md:p-12 overflow-y-auto">
-              <button onClick={() => setSelectedService(null)} className="absolute top-6 right-6 text-slate-400 hover:text-slate-900">
-                <span className="material-symbols-outlined text-3xl">close</span>
-              </button>
-              
-              <div className="space-y-8">
-                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-                  {selectedService.fullDesc}
-                </p>
-
-                {/* Grid Metodología e Impacto */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h5 className="text-xs font-black uppercase tracking-widest text-[#1a008a] mb-4">Metodología (El Proceso)</h5>
-                    <ul className="space-y-3">
-                      {selectedService.methodology.map((m: any, i: number) => (
-                        <li key={i} className="text-sm text-slate-600 flex items-start gap-3">
-                          <span className="material-symbols-outlined text-[#1a008a] text-lg">settings_suggest</span> {m}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="text-xs font-black uppercase tracking-widest text-[#1a008a] mb-4">Impacto Real</h5>
-                    <ul className="space-y-3">
-                      {selectedService.benefits.map((b: any, i: number) => (
-                        <li key={i} className="text-sm text-slate-600 flex items-start gap-3">
-                          <span className="material-symbols-outlined text-[#1a008a] text-lg">trending_up</span> {b}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* SOLUCIONES ESPECÍFICAS CON COLOR */}
-                {selectedService.businessUnits && (
-                  <div className="pt-4">
-                    <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">
-                      Soluciones Específicas <span className="lowercase font-normal">(click para ver detalle)</span>
-                    </h5>
-                    <div className="flex flex-wrap gap-3 mb-6">
-                      {selectedService.businessUnits.map((unit: any, i: number) => (
-                        <button 
-                          key={i} 
-                          onClick={() => setActiveUnit(unit)}
-                          className={`
-                            flex items-center gap-2 px-4 py-2.5 rounded-xl text-white font-bold text-xs transition-all shadow-md hover:scale-105
-                            bg-gradient-to-r ${getUnitColor(unit.name)}
-                            ${activeUnit?.name === unit.name ? 'ring-4 ring-[#1a008a]/20 scale-105 shadow-lg' : 'opacity-90'}
-                          `}
-                        >
-                          <span className="material-symbols-outlined text-sm">{unit.icon}</span>
-                          {unit.name}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Detalle dinámico de la unidad */}
-                    {activeUnit && (
-                      <div className="p-5 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 animate-fade-in">
-                        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">
-                           {activeUnit.description}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
+    <section id="servicios" className="py-24 bg-white dark:bg-[#0f172a] scroll-mt-20">
+      <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          {/* LÍNEA DE GRADIENTE: Coincide con Navbar (Primary a Accent) */}
+          <div className="w-20 h-1 bg-gradient-to-r from-[#1a008a] to-[#d946ef] mb-6 rounded-full mx-auto"></div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-[#1a008a] dark:text-white">Soluciones Integrales de RRHH</h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400">
+            Click en cada solución para explorar en profundidad nuestra propuesta diferencial.
+          </p>
         </div>
-      )}
-    </section>
-  );
-};
-
-export default Services;
+// ... (sigue igual)
