@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 const Careers: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [fileName, setFileName] = useState<string>("");
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFileName(e.target.files?.[0]?.name || "");
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -13,57 +18,33 @@ const Careers: React.FC = () => {
         body: new FormData(e.currentTarget),
         headers: { 'Accept': 'application/json' }
       });
-      if (response.ok) { setStatus('success'); } else { setStatus('error'); }
+      if (response.ok) { setStatus('success'); e.currentTarget.reset(); setFileName(""); } 
+      else { setStatus('error'); }
     } catch { setStatus('error'); }
   };
 
+  const inputClasses = "w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 outline-none transition-all placeholder:text-slate-400 text-slate-900 dark:text-white focus:scale-[1.02] focus:ring-4 focus:ring-primary/10 shadow-sm disabled:opacity-50";
+
   return (
-    <section id="talento" className="py-20 bg-slate-50 dark:bg-slate-950 scroll-mt-20">
-      <div className="max-w-[95%] mx-auto px-4">
-        <div className="bg-[#0a008a] rounded-[2.5rem] p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden shadow-2xl border border-white/10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px]"></div>
+    <section id="talento" className="py-12 bg-white dark:bg-slate-950 border-y border-slate-100 dark:border-white/5 overflow-hidden relative group transition-colors duration-300 scroll-mt-20">
+      <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 relative z-10">
+        {/* EL DEGRADADO ORIGINAL VOLVIÓ AQUÍ */}
+        <div className="bg-gradient-to-br from-[#0a008a] via-[#7b2cbf] to-[#9d4edd] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/10">
           
-          <div className="text-center md:text-left relative z-10 max-w-2xl">
-            <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 italic">
-              Talento <span className="text-purple-300">Apax</span>
-            </h3>
-            <p className="text-blue-100 text-lg mb-8 opacity-90">
-              ¿Buscas tu próximo desafío? Envianos tu CV para formar parte de nuestra red estratégica de profesionales.
-            </p>
-            <button onClick={() => setShowForm(true)} className="px-10 py-5 bg-white text-[#0a008a] font-black rounded-2xl hover:scale-105 transition-all shadow-xl">
-              CARGAR MI CV
-            </button>
-          </div>
-          <span className="material-symbols-outlined text-[150px] text-white/10 hidden lg:block">person_search</span>
-        </div>
-      </div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-[80px] -mr-20 -mt-20 pointer-events-none mix-blend-overlay animate-pulse"></div>
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.05] mix-blend-overlay"></div>
 
-      {showForm && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
-          <div className="w-full max-w-xl bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl">
-            <div className="bg-[#0a008a] p-6 text-white flex justify-between items-center">
-              <h3 className="font-bold">Enviar CV</h3>
-              <button onClick={() => setShowForm(false)}><span className="material-symbols-outlined">close</span></button>
-            </div>
-            <div className="p-8">
-              {status === 'success' ? (
-                <div className="text-center py-6 text-green-600 font-bold">¡Recibido con éxito!</div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <input name="nombre" placeholder="Nombre completo" required className="w-full p-4 bg-slate-100 dark:bg-slate-800 rounded-xl dark:text-white" />
-                  <input name="email" type="email" placeholder="Email" required className="w-full p-4 bg-slate-100 dark:bg-slate-800 rounded-xl dark:text-white" />
-                  <input type="file" name="cv" required className="w-full p-4 border-2 border-dashed rounded-xl dark:text-white" />
-                  <button type="submit" disabled={status === 'submitting'} className="w-full bg-[#0a008a] text-white py-4 rounded-xl font-bold">
-                    {status === 'submitting' ? "Enviando..." : "Enviar Postulación"}
-                  </button>
-                </form>
-              )}
-            </div>
+          <div className="text-center md:text-left relative z-10 max-w-3xl">
+             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-black uppercase tracking-widest mb-6 backdrop-blur-md shadow-lg">
+                <span className="material-symbols-outlined text-sm">groups</span>
+                Talento Apax
+             </div>
+             <h3 className="text-2xl md:text-4xl font-display font-bold text-white mb-4 leading-tight italic">
+               ¿Buscas tu próximo desafío profesional?
+             </h3>
+             <p className="text-purple-50 text-lg leading-relaxed font-manrope font-medium opacity-90">
+               Somos el nexo estratégico entre tu potencial y las empresas líderes del mercado. Envianos tu CV para formar parte de nuestra base de talentos.
+             </p>
           </div>
-        </div>
-      )}
-    </section>
-  );
-};
 
-export default Careers;
+          <div className="relative
