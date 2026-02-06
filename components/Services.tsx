@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// Restauramos la estructura de datos completa
 const servicesData = [
   {
     id: 'reclutamiento',
@@ -45,7 +44,6 @@ const Services = () => {
     <section id="servicios" className="py-20 bg-white dark:bg-slate-950">
       <div className="max-w-6xl mx-auto px-6">
         
-        {/* Título Bold (el que te gustó) */}
         <div className="text-center mb-16">
           <div className="w-14 h-1 bg-[#1a008a] mb-6 rounded-full mx-auto"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-[#1a008a] dark:text-white tracking-tight mb-4">
@@ -56,7 +54,6 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Grid de Cuadrados */}
         <div className="grid md:grid-cols-3 gap-8">
           {servicesData.map((s, index) => (
             <div 
@@ -88,12 +85,10 @@ const Services = () => {
         </div>
       </div>
 
-      {/* MODAL RECUPERADO CON TODA LA INFO */}
       {selectedService && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setSelectedService(null)}>
           <div className="bg-white dark:bg-slate-900 w-full max-w-3xl max-h-[90vh] rounded-[2.5rem] overflow-hidden shadow-2xl relative flex flex-col md:flex-row" onClick={e => e.stopPropagation()}>
             
-            {/* Lateral Visual del Modal */}
             <div className="w-full md:w-1/3 bg-[#1a008a] relative h-40 md:h-auto">
               <img src={selectedService.img} className="w-full h-full object-cover opacity-40" alt="" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -101,7 +96,6 @@ const Services = () => {
               </div>
             </div>
 
-            {/* Contenido Detallado */}
             <div className="w-full md:w-2/3 p-8 md:p-12 overflow-y-auto">
               <button onClick={() => setSelectedService(null)} className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors">
                 <span className="material-symbols-outlined text-3xl">close</span>
