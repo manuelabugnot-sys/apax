@@ -96,3 +96,62 @@ const Services = () => {
             {/* Lateral Visual del Modal */}
             <div className="w-full md:w-1/3 bg-[#1a008a] relative h-40 md:h-auto">
               <img src={selectedService.img} className="w-full h-full object-cover opacity-40" alt="" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="material-symbols-outlined text-6xl text-white opacity-50">{selectedService.icon}</span>
+              </div>
+            </div>
+
+            {/* Contenido Detallado */}
+            <div className="w-full md:w-2/3 p-8 md:p-12 overflow-y-auto">
+              <button onClick={() => setSelectedService(null)} className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors">
+                <span className="material-symbols-outlined text-3xl">close</span>
+              </button>
+              
+              <h2 className="text-3xl font-bold text-[#1a008a] dark:text-white mb-6 leading-tight">
+                {selectedService.title}
+              </h2>
+              
+              <div className="space-y-6">
+                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+                  {selectedService.fullDesc}
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 pt-4">
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-[#1a008a] mb-3">Metodología</h4>
+                    <ul className="space-y-2">
+                      {selectedService.methodology.map((m: any) => (
+                        <li key={m} className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#1a008a]"></span>{m}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-[#1a008a] mb-3">Beneficios</h4>
+                    <ul className="space-y-2">
+                      {selectedService.benefits.map((b: any) => (
+                        <li key={b} className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                          <span className="material-symbols-outlined text-xs text-green-500">check_circle</span>{b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => setSelectedService(null)}
+                  className="w-full mt-6 py-4 bg-[#1a008a] text-white rounded-xl font-bold text-lg hover:bg-blue-900 transition-colors"
+                >
+                  Cerrar Detalle
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+export default Services;
