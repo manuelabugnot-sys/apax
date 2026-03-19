@@ -150,12 +150,13 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
               onClick={(e) => handleScrollTo(e, 'inicio')}
               className="h-full flex items-center"
             >
+              {/* LOGO: Animación sutil y elegante (Fade + Blur) */}
               <motion.div
                 initial={{ opacity: 0, x: -15, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                 transition={{ 
                   duration: 1.2, 
-                  ease: [0.25, 0.4, 0.25, 1] 
+                  ease: [0.25, 0.4, 0.25, 1] // Curva suave y sofisticada
                 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -210,6 +211,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
             </motion.div>
           </motion.div>
 
+          {/* Mobile UI */}
           <div className="lg:hidden flex items-center space-x-4">
             <button onClick={onToggleDarkMode} className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors">
               <span className="material-symbols-outlined text-xl">dark_mode</span>
