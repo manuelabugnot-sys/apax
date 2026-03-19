@@ -9,7 +9,7 @@
     
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.symbols.outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     
     <script>
       window.tailwind.config = {
@@ -25,6 +25,7 @@
             fontFamily: {
               display: ["Plus Jakarta Sans", "sans-serif"],
               manrope: ["Manrope", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
             },
             animation: {
               'slow-zoom': 'slowZoom 20s ease-in-out infinite alternate',
@@ -51,13 +52,19 @@
           @apply text-transparent bg-clip-text bg-gradient-to-r from-[#0a008a] to-[#9d4edd];
         }
         .btn-gradient {
-          @apply bg-gradient-to-r from-[#0a008a] to-[#9d4edd] hover:opacity-90 transition-all;
+          @apply bg-gradient-to-r from-[#0a008a] to-[#9d4edd] hover:opacity-90 transition-all shadow-lg;
         }
+      }
+      
+      /* Prevenir que se vea blanco antes de cargar el modo oscuro */
+      .dark body {
+        background-color: #020617;
       }
     </style>
   </head>
-  <body class="bg-white dark:bg-[#020617] transition-colors duration-300">
+  <body class="bg-white dark:bg-[#020617] text-slate-900 dark:text-slate-100 transition-colors duration-300">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
