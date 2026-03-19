@@ -46,7 +46,7 @@ const servicesData: ServiceDetail[] = [
       },
       { 
         name: "Executive Search (Headhunting)", 
-        colorClass: "from-[#1a008a] to-indigo-600 shadow-indigo-500/20",
+        colorClass: "from-primary to-indigo-600 shadow-primary/20",
         icon: "diamond",
         description: "Búsqueda confidencial y de 'guante blanco' para posiciones de Dirección y Gerencia General. Mapeo de mercado exhaustivo y acercamiento discreto."
       },
@@ -196,8 +196,7 @@ const ServiceCard: React.FC<{
       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
       src={service.img}
     />
-    {/* Gradiente que usa los colores de tu Navbar: Primary (#1a008a) a Magenta (#701a75) */}
-    <div className="absolute inset-0 bg-gradient-to-br from-[#1a008a]/95 via-[#1a008a]/85 to-[#701a75]/80 opacity-95 group-hover:opacity-90 transition-opacity"></div>
+    <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/85 to-magenta/80 opacity-95 group-hover:opacity-90 transition-opacity"></div>
     <div className="relative z-10 p-10 flex flex-col h-full text-white">
       <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white mb-6 border border-white/20">
         <span className="material-symbols-outlined text-3xl">{service.icon}</span>
@@ -220,6 +219,7 @@ const Services: React.FC = () => {
   useEffect(() => {
     if (selectedService) {
       document.body.style.overflow = 'hidden';
+      // Reset active unit when opening a new service
       setActiveUnit(null);
     } else {
       document.body.style.overflow = 'auto';
@@ -227,12 +227,11 @@ const Services: React.FC = () => {
   }, [selectedService]);
 
   return (
-    <section id="servicios" className="py-24 bg-white dark:bg-[#0f172a] scroll-mt-20">
+    <section id="servicios" className="py-24 bg-white dark:bg-background-dark scroll-mt-20">
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          {/* Línea de acento usando Primary (#1a008a) y Accent (#d946ef) */}
-          <div className="w-20 h-1 bg-gradient-to-r from-[#1a008a] to-[#d946ef] mb-6 rounded-full mx-auto"></div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-[#1a008a] dark:text-white">Soluciones Integrales de RRHH</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mb-6 rounded-full mx-auto"></div>
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-primary dark:text-white">Soluciones Integrales de RRHH</h2>
           <p className="text-lg text-slate-600 dark:text-slate-400">
             Click en cada solución para explorar en profundidad nuestra propuesta diferencial.
           </p>
@@ -252,17 +251,17 @@ const Services: React.FC = () => {
 
       {/* Ventana Detallada (Modal) */}
       {selectedService && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 animate-fade-in">
           <div 
-            className="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-sm" 
+            className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" 
             onClick={() => setSelectedService(null)}
           ></div>
           
-          <div className="relative bg-white dark:bg-slate-900 w-full max-w-5xl max-h-[90vh] rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+          <div className="relative bg-white dark:bg-slate-900 w-full max-w-5xl max-h-[90vh] rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row animate-scale-up">
             {/* Lateral Visual */}
             <div className="w-full md:w-2/5 relative h-48 md:h-auto">
               <img src={selectedService.img} alt={selectedService.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#1a008a]/60 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-navy/60 to-transparent"></div>
               <div className="absolute bottom-6 left-6 text-white">
                 <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center mb-4">
                   <span className="material-symbols-outlined text-2xl">{selectedService.icon}</span>
@@ -272,17 +271,17 @@ const Services: React.FC = () => {
             </div>
 
             {/* Contenido */}
-            <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto">
+            <div className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto custom-scrollbar">
               <button 
                 onClick={() => setSelectedService(null)}
-                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-[#1a008a] transition-colors"
+                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-navy transition-colors"
               >
                 <span className="material-symbols-outlined">close</span>
               </button>
 
               <div className="space-y-8">
                 <div>
-                  <h5 className="text-xs font-black uppercase tracking-widest text-[#1a008a] dark:text-[#d946ef] mb-4">Visión Apax</h5>
+                  <h5 className="text-xs font-black uppercase tracking-widest text-primary dark:text-accent mb-4">Visión Apax</h5>
                   <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
                     {selectedService.fullDesc}
                   </p>
@@ -290,22 +289,22 @@ const Services: React.FC = () => {
 
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <h5 className="text-xs font-black uppercase tracking-widest text-[#1a008a] dark:text-[#d946ef] mb-4">Metodología</h5>
+                    <h5 className="text-xs font-black uppercase tracking-widest text-primary dark:text-accent mb-4">Metodología (El Proceso)</h5>
                     <ul className="space-y-3">
                       {selectedService.methodology.map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
-                          <span className="material-symbols-outlined text-[#1a008a] dark:text-[#d946ef] text-sm mt-0.5">settings_suggest</span>
+                          <span className="material-symbols-outlined text-primary dark:text-accent text-sm mt-0.5">settings_suggest</span>
                           {item}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h5 className="text-xs font-black uppercase tracking-widest text-[#1a008a] dark:text-[#d946ef] mb-4">Impacto Real</h5>
+                    <h5 className="text-xs font-black uppercase tracking-widest text-primary dark:text-accent mb-4">Impacto Real</h5>
                     <ul className="space-y-3">
                       {selectedService.benefits.map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
-                          <span className="material-symbols-outlined text-[#1a008a] dark:text-[#d946ef] text-sm mt-0.5">trending_up</span>
+                          <span className="material-symbols-outlined text-primary dark:text-accent text-sm mt-0.5">trending_up</span>
                           {item}
                         </li>
                       ))}
@@ -313,11 +312,13 @@ const Services: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Sección de Unidades de Negocio Interactiva */}
                 {selectedService.businessUnits && (
                   <div>
-                    <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">
-                      Soluciones Específicas
+                    <h5 className="text-xs font-black uppercase tracking-widest text-primary dark:text-accent mb-4">
+                      Soluciones Específicas <span className="font-normal text-slate-400 lowercase ml-1">(Click para ver detalle)</span>
                     </h5>
+                    
                     <div className="flex flex-wrap gap-3 mb-6">
                       {selectedService.businessUnits.map((unit, i) => {
                         const isActive = activeUnit?.name === unit.name;
@@ -327,36 +328,56 @@ const Services: React.FC = () => {
                             onClick={() => setActiveUnit(unit)}
                             className={`
                               relative pl-3 pr-4 py-2.5 rounded-xl bg-gradient-to-r ${unit.colorClass} 
-                              text-white shadow-lg transition-all duration-300 flex items-center gap-2
-                              ${isActive ? 'ring-4 ring-offset-2 ring-[#1a008a]/30 scale-105' : 'hover:scale-105 opacity-90'}
+                              text-white shadow-lg transform transition-all duration-300
+                              flex items-center gap-2 group outline-none
+                              ${isActive ? 'ring-4 ring-offset-2 ring-primary/30 scale-105' : 'hover:scale-105 hover:shadow-xl opacity-90 hover:opacity-100'}
                             `}
                           >
-                            <span className="material-symbols-outlined text-sm font-bold">{unit.icon}</span>
-                            <span className="text-xs font-bold">{unit.name}</span>
+                            <div className="p-1 bg-white/20 rounded-lg backdrop-blur-sm">
+                               <span className="material-symbols-outlined text-sm font-bold">{unit.icon}</span>
+                            </div>
+                            <span className="text-xs font-bold tracking-wide">{unit.name}</span>
+                            {isActive && (
+                              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-white dark:border-t-slate-800"></div>
+                            )}
                           </button>
                         );
                       })}
                     </div>
 
+                    {/* Contenedor de Descripción Dinámica */}
                     {activeUnit && (
-                      <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-700">
-                        <h6 className="font-bold text-slate-900 dark:text-white mb-2">{activeUnit.name}</h6>
-                        <p className="text-sm text-slate-600 dark:text-slate-300">{activeUnit.description}</p>
+                      <div className="animate-fade-in bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-700 relative">
+                        <div className="flex items-start gap-4">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white bg-gradient-to-br ${activeUnit.colorClass} shadow-lg shrink-0`}>
+                            <span className="material-symbols-outlined text-lg">{activeUnit.icon}</span>
+                          </div>
+                          <div>
+                            <h6 className="font-bold text-slate-900 dark:text-white mb-2">{activeUnit.name}</h6>
+                            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                              {activeUnit.description}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
                 )}
 
-                <div className="pt-8 border-t border-slate-100 flex flex-col sm:flex-row gap-4">
+                <div className="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-4">
                   <button 
-                    onClick={() => setSelectedService(null)}
-                    className="bg-[#1a008a] text-white px-8 py-4 rounded-xl font-bold flex-1 hover:brightness-110 transition-all"
+                    onClick={() => {
+                      setSelectedService(null);
+                      const contact = document.getElementById('contacto');
+                      contact?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="btn-gradient text-white px-8 py-4 rounded-xl font-bold flex-1"
                   >
                     Agendar Consultoría
                   </button>
                   <button 
                     onClick={() => setSelectedService(null)}
-                    className="bg-slate-100 text-slate-600 px-8 py-4 rounded-xl font-bold hover:bg-slate-200 transition-colors"
+                    className="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-bold hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                   >
                     Cerrar
                   </button>
