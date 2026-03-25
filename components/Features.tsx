@@ -72,23 +72,30 @@ const Features: React.FC = () => {
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16">
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mb-6 rounded-full"></div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-primary dark:text-white">Nuestro diferencial</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-primary dark:text-white leading-tight">
+            Nuestro diferencial
+          </h2>
         </div>
+
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
           {features.map((f, i) => (
-            <div key={i} className="bg-white dark:bg-slate-800 p-10 rounded-[2rem] border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-all group h-full">
+            <div key={i} className="bg-white dark:bg-slate-800 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all group h-full shadow-sm">
               
-              {/* --- CAMBIO EN EL CONTENEDOR DEL ICONO --- */}
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm
+              {/* CONTENEDOR DE ICONO: Azul Indigo suave para 'navy' y Lavanda para 'magenta' en Modo Claro */}
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300 shadow-sm group-hover:scale-110 
                 ${f.color === 'navy' 
-                  ? 'bg-slate-100 text-primary dark:bg-blue-500/20 dark:text-blue-400' 
-                  : 'bg-purple-50 text-magenta dark:bg-accent/20 dark:text-accent'}`}
+                  ? 'bg-[#e0e7ff] text-[#1e1b4b] dark:bg-blue-500/20 dark:text-blue-400' 
+                  : 'bg-[#f3e8ff] text-[#581c87] dark:bg-magenta/20 dark:text-magenta'}`}
               >
                 <span className="material-symbols-outlined text-3xl font-bold">{f.icon}</span>
               </div>
 
-              <h4 className="text-2xl font-bold mb-4 text-primary dark:text-white font-display">{f.title}</h4>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-manrope">{f.desc}</p>
+              <h4 className="text-2xl font-bold mb-4 text-primary dark:text-white font-display">
+                {f.title}
+              </h4>
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-manrope">
+                {f.desc}
+              </p>
             </div>
           ))}
         </div>
