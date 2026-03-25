@@ -57,10 +57,21 @@ const servicesData: ServiceDetail[] = [
     ],
     benefits: ["Incremento en el engagement.", "Retención de altos potenciales.", "Fortalecimiento de Marca Empleadora."]
   },
-  {
+ {
     id: 'consultoria',
     title: "Consultoría Estratégica",
     icon: "hub",
     img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Alineamos su arquitectura de RRHH con los objetivos de negocio, transformando la estructura para que sea ágil, eficiente y, sobre todo, humana.",
-    methodology: ["Reingeniería de Procesos (BPR).", "Análisis de Estructuras Organizativas.", "Plan
+    methodology: ["Reingeniería de Procesos (BPR)", "Análisis de Estructuras Organizativas", "Planificación de Workforce"],
+    businessUnits: [
+        { name: "Clima & Cultura", colorClass: "from-lime-600 to-green-600", icon: "sentiment_very_satisfied", description: "Diagnóstico de salud organizacional y bienestar." },
+        { name: "Outplacement", colorClass: "from-slate-700 to-slate-900", icon: "next_plan", description: "Programas de transición de carrera responsables." },
+        { name: "Gestión del Cambio", colorClass: "from-indigo-600 to-purple-600", icon: "published_with_changes", description: "Acompañamiento en fusiones o implementaciones tecnológicas." },
+        { name: "People Analytics", colorClass: "from-blue-700 to-indigo-800", icon: "query_stats", description: "KPIs estratégicos (Rotación, Absentismo, Headcount)." },
+        { name: "Startups & Scale-ups", colorClass: "from-fuchsia-600 to-pink-700", icon: "rocket_launch", description: "Creación de RRHH desde cero para empresas en crecimiento." },
+        { name: "Manuales & Puestos", colorClass: "from-teal-600 to-emerald-600", icon: "menu_book", description: "Definición de roles para optimizar la operación." }
+    ],
+    benefits: ["Estructuras ágiles", "Mejora del clima basada en datos", "Optimización de costos"]
+  }
+];
