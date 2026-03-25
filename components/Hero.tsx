@@ -16,13 +16,13 @@ const Hero: React.FC = () => {
 
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full pt-28 md:pt-40 pb-24 md:pb-32">
         <div className="max-w-4xl">
-          {/* Badge superior */}
+          {/* Badge superior - MODIFICADO SIN UPPERCASE */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 dark:bg-white/10 backdrop-blur-md text-primary dark:text-accent font-bold text-sm mb-8 border border-primary/10 dark:border-white/10 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
             </span>
-            <span className="tracking-tight uppercase">Impulsando el potencial humano</span>
+            <span className="tracking-wide font-bold">Impulsando el potencial humano</span>
           </div>
           
           {/* Título Principal */}
