@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 
+// --- COMPONENTE BRANDLOGO MODIFICADO PARA MÁS IMPACTO ---
 export const BrandLogo: React.FC<{ className?: string, isFooter?: boolean }> = ({ 
   className = "h-16", 
   isFooter = false 
@@ -31,11 +32,14 @@ export const BrandLogo: React.FC<{ className?: string, isFooter?: boolean }> = (
         key={currentSrc}
         src={currentSrc} 
         alt="Apax Management Logo" 
-        className={`h-full w-auto object-contain transition-all duration-500 ease-out
-          ${!isFooter ? 'hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.7)]' : ''}
+        className={`h-full w-auto object-contain transition-all duration-700 ease-out
+          ${!isFooter 
+            ? 'drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] group-hover/logo:drop-shadow-[0_0_25px_rgba(255,255,255,0.8)] group-hover/logo:scale-105' 
+            : ''}
         `}
         style={{ 
-          filter: !isFooter ? 'brightness(0) invert(1)' : 'none'
+          // Eliminamos el invert(1) para usar el logo original blanco con más brillo y nitidez
+          filter: !isFooter ? 'brightness(1.1) contrast(1.1)' : 'none'
         }}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
@@ -150,16 +154,13 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
               onClick={(e) => handleScrollTo(e, 'inicio')}
               className="h-full flex items-center"
             >
-              {/* LOGO: Animación sutil y elegante (Fade + Blur) */}
               <motion.div
                 initial={{ opacity: 0, x: -15, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                 transition={{ 
                   duration: 1.2, 
-                  ease: [0.25, 0.4, 0.25, 1] // Curva suave y sofisticada
+                  ease: [0.25, 0.4, 0.25, 1] 
                 }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 className="flex items-center z-10"
               >
                 <BrandLogo className="h-14 md:h-28 w-auto origin-left" />
