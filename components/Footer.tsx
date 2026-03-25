@@ -39,35 +39,37 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white pt-20 pb-12 border-t border-slate-200 dark:border-slate-800 transition-colors">
-      {/* Definición de la animación de flotación */}
+      
+      {/* Definición de la animación de flotación "bobbing" */}
       <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes float {
+        @keyframes float-large {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-15px); }
           100% { transform: translateY(0px); }
         }
         .animate-float-logo {
-          animation: float 4s ease-in-out infinite;
+          animation: float-large 4s ease-in-out infinite;
         }
       `}} />
 
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 mb-16">
           
-          {/* Columna 1: Logo e Identidad con Animación */}
+          {/* Columna 1: Logo e Identidad - Restaurado el tamaño H-48 */}
           <div className="space-y-6">
-            <div className="h-32 flex items-center">
-              {/* Contenedor con la clase de animación personalizada */}
-              <div className="animate-float-logo">
+            {/* Contenedor del logo con el tamaño original h-48 */}
+            <div className="h-48 flex items-center">
+              {/* Aplicamos la animación al contenedor interno del logo */}
+              <div className="animate-float-logo w-auto h-full">
                 <img 
                   src="logo-color.png" 
-                  className="h-24 w-auto object-contain block dark:hidden drop-shadow-md" 
+                  className="h-full w-auto object-contain block dark:hidden drop-shadow-lg" 
                   alt="Apax Management"
                   onError={(e) => {(e.target as HTMLImageElement).src = 'logo.png'}}
                 />
                 <img 
                   src="logo.png" 
-                  className="h-24 w-auto object-contain hidden dark:block drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
+                  className="h-full w-auto object-contain hidden dark:block drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]" 
                   alt="Apax Management"
                 />
               </div>
