@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
 
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full pt-28 md:pt-40 pb-24 md:pb-32">
         <div className="max-w-4xl">
-          {/* Badge superior con pulso */}
+          {/* Badge superior */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 dark:bg-white/10 backdrop-blur-md text-primary dark:text-accent font-bold text-sm mb-8 border border-primary/10 dark:border-white/10 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
           </p>
           
           <div className="flex flex-wrap gap-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-            {/* Botón 1: Consultoría (Azul/Gradiente) */}
+            {/* Botón: Agendar Consultoría */}
             <button 
               onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
               className="btn-gradient text-white px-10 py-5 rounded-full text-lg font-bold shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
@@ -46,7 +46,7 @@ const Hero: React.FC = () => {
               <span className="material-symbols-outlined">arrow_forward</span>
             </button>
 
-            {/* Botón 2: Ver Soluciones (Neutro) */}
+            {/* Botón: Ver Soluciones */}
             <button 
               onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-white/60 dark:bg-white/10 backdrop-blur-md border border-slate-200 dark:border-white/10 px-10 py-5 rounded-full text-lg font-bold hover:bg-white dark:hover:bg-white/20 transition-all text-slate-700 dark:text-white shadow-sm hover:scale-105 active:scale-95"
@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
               Ver Soluciones
             </button>
 
-            {/* Botón 3: Talento Apax (MAGENTA VIOLETA SÓLIDO) */}
+            {/* Botón: Talento Apax (Color Magenta/Violeta) */}
             <button 
               onClick={() => document.getElementById('talento')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-gradient-to-r from-magenta to-[#7b2cbf] text-white px-8 py-5 rounded-full text-lg font-bold shadow-xl shadow-magenta/40 hover:shadow-magenta/60 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 group"
