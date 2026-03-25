@@ -77,15 +77,18 @@ const Features: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
           {features.map((f, i) => (
             <div key={i} className="bg-white dark:bg-slate-800 p-10 rounded-[2rem] border border-slate-100 dark:border-slate-700 hover:shadow-xl transition-all group h-full">
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm
+              
+              {/* --- CAMBIO EN EL CONTENEDOR DEL ICONO --- */}
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm
                 ${f.color === 'navy' 
-                  ? 'bg-navy/10 text-navy dark:bg-blue-500/20 dark:text-blue-400' 
-                  : 'bg-magenta/10 text-magenta dark:bg-accent/20 dark:text-accent'}`}
+                  ? 'bg-slate-100 text-primary dark:bg-blue-500/20 dark:text-blue-400' 
+                  : 'bg-purple-50 text-magenta dark:bg-accent/20 dark:text-accent'}`}
               >
                 <span className="material-symbols-outlined text-3xl font-bold">{f.icon}</span>
               </div>
-              <h4 className="text-2xl font-bold mb-4 text-primary dark:text-white">{f.title}</h4>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{f.desc}</p>
+
+              <h4 className="text-2xl font-bold mb-4 text-primary dark:text-white font-display">{f.title}</h4>
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-manrope">{f.desc}</p>
             </div>
           ))}
         </div>
