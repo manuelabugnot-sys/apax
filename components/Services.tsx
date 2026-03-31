@@ -141,7 +141,7 @@ const Services: React.FC = () => {
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <div className="w-20 h-1.5 bg-gradient-to-r from-magenta to-[#7b2cbf] mb-6 rounded-full mx-auto"></div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white tracking-tight">Soluciones de Capital Humano</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white tracking-tight">Soluciones Integrales de RRHH</h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 font-medium">Click en cada área para profundizar en nuestra propuesta.</p>
         </div>
 
