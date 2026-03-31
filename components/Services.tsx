@@ -26,10 +26,11 @@ const servicesData: ServiceDetail[] = [
     img: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Nuestro proceso de Reclutamiento identifica piezas fundamentales para el engranaje de su cultura. Utilizamos metodologías de 'Human-Centric Sourcing' para asegurar que el talento posea tanto habilidades técnicas como valores compartidos.",
     methodology: [
-      "Levantamiento de Perfil Cultural (Culture Fit Analysis).",
-      "Sourcing Pasivo en redes de nicho y bases privadas.",
-      "Entrevistas por Competencias (STAR Method).",
-      "Validación de Referencias 360° y Onboarding estratégico."
+      "Headhunting 4.0: Búsqueda proactiva en redes globales.",
+      "Entrevistas por competencias y valores culturales.",
+      "Evaluaciones psicotécnicas y de potencial de desarrollo.",
+      "Onboarding estratégico para asegurar una integración exitosa.",
+      "Seguimiento post ingreso para garantizar la adaptación cultural."
     ],
     businessUnits: [
       { name: "IT & Digital Specialists", colorClass: "from-blue-600 to-cyan-500 shadow-blue-500/20", icon: "terminal", description: "Especializados en perfiles tecnológicos (Devs, Data, DevOps) entendiendo los stacks y la velocidad del mercado." },
@@ -51,9 +52,10 @@ const servicesData: ServiceDetail[] = [
     img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Potenciamos las capacidades actuales y preparamos a su equipo para los desafíos del futuro mediante un mapeo preciso de capacidades y planes de carrera motivadores.",
     methodology: [
-      "Diagnóstico de Brechas de Habilidades (Skill Gap).",
-      "Diseño Instruccional a Medida para Capacitaciones.",
-      "Medición del ROI de Capacitación y Mentoring."
+      "Mapeo de Talento para identificar líderes.",
+      "Programas de Mentoring y Coaching Ejecutivo.",
+      "Diseño de planes de sucesión y continuidad.",
+      "Arquitectura de compensaciones y beneficios emocionales."
     ],
     businessUnits: [
       { name: "Liderazgo & Gestión", colorClass: "from-magenta to-[#7b2cbf] shadow-magenta/20", icon: "supervisor_account", description: "Entrenamiento para nuevos líderes en feedback, comunicación asertiva y gestión de equipos de alto rendimiento." },
@@ -76,9 +78,9 @@ const servicesData: ServiceDetail[] = [
     img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Alineamos su arquitectura de RRHH con los objetivos de negocio, transformando la estructura para que sea ágil, eficiente y humana.",
     methodology: [
-      "Reingeniería de Procesos de RRHH (BPR).",
-      "Análisis de Estructuras Organizativas y Rediseño.",
-      "Planificación Estratégica de Workforce (Plantilla)."
+      "Gestión del cambio ante transformaciones organizacionales.",
+      "Análisis profundo de clima y cultura organizacional.",
+      "Diseño de KPIs estratégicos de gestión humana."
     ],
     businessUnits: [
       { name: "Clima & Cultura", colorClass: "from-lime-600 to-green-600 shadow-lime-500/20", icon: "sentiment_very_satisfied", description: "Diagnóstico profundo de salud organizacional, bienestar y clima de trabajo." },
@@ -128,7 +130,6 @@ const Services: React.FC = () => {
   useEffect(() => {
     document.body.style.overflow = selectedService ? 'hidden' : 'auto';
     
-    // Al abrir una solución, por defecto seleccionamos su primera unidad de negocio si existe
     if (selectedService && selectedService.businessUnits && selectedService.businessUnits.length > 0) {
       setActiveUnit(selectedService.businessUnits[0]);
     } else {
@@ -182,7 +183,6 @@ const Services: React.FC = () => {
                   <p className="text-xl text-slate-700 dark:text-slate-200 leading-relaxed font-medium">{selectedService.fullDesc}</p>
                 </div>
 
-                {/* Unidades de negocio en formato interactivo */}
                 {selectedService.businessUnits && (
                   <div>
                     <h5 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Unidades Especializadas</h5>
@@ -216,7 +216,6 @@ const Services: React.FC = () => {
                   </div>
                 )}
 
-                {/* Doble Columna para Metodologías y Beneficios (recuperado de tu primer código) */}
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <h5 className="text-xs font-black uppercase tracking-widest text-magenta mb-4">Metodología</h5>
@@ -243,7 +242,6 @@ const Services: React.FC = () => {
                 </div>
               </div>
 
-              {/* Botonera de Acción Footer (Fija abajo) */}
               <div className="pt-8 mt-12 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-4">
                 <button 
                   onClick={() => { 
