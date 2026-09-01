@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
 
-// --- COMPONENTE BRANDLOGO MODIFICADO PARA MÁS IMPACTO ---
+import React, { useState, useEffect } from 'react';
+
 export const BrandLogo: React.FC<{ className?: string, isFooter?: boolean }> = ({ 
   className = "h-16", 
   isFooter = false 
@@ -9,12 +8,14 @@ export const BrandLogo: React.FC<{ className?: string, isFooter?: boolean }> = (
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    // Función para detectar si la página está en modo oscuro
     const checkDark = () => {
       setIsDark(document.documentElement.classList.contains('dark'));
     };
     
-    checkDark();
+    checkDark(); // Chequeo inicial
 
+    // Esto detecta cuando haces clic en el botón de modo luz/oscuro
     const observer = new MutationObserver(checkDark);
     observer.observe(document.documentElement, { 
       attributes: true, 
@@ -24,25 +25,26 @@ export const BrandLogo: React.FC<{ className?: string, isFooter?: boolean }> = (
     return () => observer.disconnect();
   }, []);
 
+  // Decidimos qué imagen mostrar
+  // Si es el footer y NO está oscuro, muestra el de color. Si no, el blanco.
   const currentSrc = (isFooter && !isDark) ? 'logo-color.png' : 'logo.png';
 
   return (
     <div className={`${className} flex items-center select-none group/logo`}>
       <img 
-        key={currentSrc}
+        key={currentSrc} // Esto obliga a la imagen a recargar cuando cambia el modo
         src={currentSrc} 
         alt="Apax Management Logo" 
-        className={`h-full w-auto object-contain transition-all duration-700 ease-out
-          ${!isFooter 
-            ? 'drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] group-hover/logo:drop-shadow-[0_0_25px_rgba(255,255,255,0.8)] group-hover/logo:scale-105' 
-            : ''}
+        className={`h-full w-auto object-contain transition-all duration-500 ease-out
+          ${!isFooter ? 'hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]' : ''}
         `}
         style={{ 
-          // Eliminamos el invert(1) para usar el logo original blanco con más brillo y nitidez
-          filter: !isFooter ? 'brightness(1.1) contrast(1.1)' : 'none'
+          // Si es la barra de arriba (!isFooter), forzamos que sea blanco puro siempre
+          filter: !isFooter ? 'brightness(0) invert(1)' : 'none'
         }}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
+          // Si falla el logo de color, intentamos mostrar el blanco
           if (currentSrc === 'logo-color.png') {
             target.src = 'logo.png';
           }
@@ -64,21 +66,24 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
   const navLinks = [
     { name: 'Inicio', id: 'inicio' },
     { name: 'Quiénes somos', id: 'quienes-somos' },
-    { name: 'Equipo', id: 'equipo' },
     { name: 'Servicios', id: 'servicios' },
+    { name: 'Empleabilidad', id: 'empleabilidad' },
+    { name: 'Equipo', id: 'equipo' },
     { name: 'AI Lab', id: 'ai-lab' },
     { name: 'Contacto', id: 'contacto' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
+      // Logic for Progress Bar
       const totalScroll = document.documentElement.scrollTop;
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scroll = `${totalScroll / windowHeight}`;
       setScrollProgress(Number(scroll));
 
+      // Logic for Active Section
       const sections = navLinks.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 120;
+      const scrollPosition = window.scrollY + 150; // Offset aumentado por la barra más grande
 
       for (const section of sections) {
         if (section) {
@@ -100,7 +105,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
     e.preventDefault();
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 80;
+      const offset = 100; // Ajustado para la barra más alta
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -109,110 +114,59 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
     }
   };
 
-  const navContainerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.6
-      }
-    }
-  };
-
-  const navItemVariants: Variants = {
-    hidden: { opacity: 0, y: -15, filter: 'blur(4px)' },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      filter: 'blur(0px)',
-      transition: { 
-        type: "spring", 
-        stiffness: 120, 
-        damping: 20 
-      }
-    }
-  };
-
   return (
-    <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed w-full z-50 bg-gradient-to-r from-primary/95 to-magenta/95 backdrop-blur-md border-b border-white/10 shadow-lg"
-    >
+    <nav className="fixed w-full z-50 bg-gradient-to-r from-primary/95 to-magenta/95 backdrop-blur-md border-b border-white/10 transition-all shadow-lg">
+      {/* Scroll Progress Bar */}
       <div 
         className="absolute bottom-0 left-0 h-[3px] bg-white/80 transition-all duration-100 ease-out z-50"
         style={{ width: `${scrollProgress * 100}%` }}
       ></div>
 
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          <div className="flex items-center h-full">
+        <div className="flex justify-between items-center h-20 md:h-28 transition-all duration-300">
+          <div className="flex items-center h-full py-2">
             <a 
               href="#inicio" 
               onClick={(e) => handleScrollTo(e, 'inicio')}
-              className="h-full flex items-center"
+              className="transition-all h-full flex items-center"
             >
-              <motion.div
-                initial={{ opacity: 0, x: -15, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                transition={{ 
-                  duration: 1.2, 
-                  ease: [0.25, 0.4, 0.25, 1] 
-                }}
-                className="flex items-center z-10"
-              >
-                <BrandLogo className="h-14 md:h-28 w-auto origin-left" />
-              </motion.div>
+              {/* Logo Image Container - Tamaño ajustado */}
+              <BrandLogo className="h-16 md:h-24 w-auto" />
             </a>
           </div>
 
-          <motion.div 
-            variants={navContainerVariants}
-            initial="hidden"
-            animate="visible"
-            className="hidden lg:flex items-center space-x-1"
-          >
+          <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <motion.a 
+              <a 
                 key={link.name}
-                variants={navItemVariants}
                 href={`#${link.id}`}
                 onClick={(e) => handleScrollTo(e, link.id)}
                 className={`
-                  relative font-manrope font-bold transition-all duration-300 tracking-tight text-[13px] whitespace-nowrap px-4 py-1.5 rounded-full
-                  ${activeSection === link.id ? 'text-white' : 'text-white/80 hover:text-white'}
+                  font-manrope font-bold transition-all duration-300 tracking-tight text-[14px] whitespace-nowrap px-4 py-2 rounded-full border border-transparent
+                  ${activeSection === link.id 
+                    ? 'text-white bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)] border-white/20 scale-105' 
+                    : 'text-white/90 hover:text-white hover:bg-white/10 hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]'}
                 `}
               >
-                {activeSection === link.id && (
-                  <motion.div 
-                    layoutId="active-pill"
-                    className="absolute inset-0 bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)] border border-white/20 rounded-full z-[-1]"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
                 {link.name}
-              </motion.a>
+              </a>
             ))}
-            
-            <motion.div variants={navItemVariants} className="pl-4 flex items-center gap-2">
+            <div className="pl-4 flex items-center gap-2">
               <button 
                 onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white hover:bg-slate-100 text-primary px-6 py-2.5 rounded-full font-manrope font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg text-xs"
+                className="bg-white hover:bg-slate-100 text-primary px-7 py-3 rounded-full font-manrope font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg text-sm"
               >
                 Agendar Consultoría
               </button>
               <button 
                 onClick={onToggleDarkMode}
-                className="p-2.5 ml-1 rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                className="p-3 ml-2 rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
               >
-                <span className="material-symbols-outlined text-lg">dark_mode</span>
+                <span className="material-symbols-outlined text-xl">dark_mode</span>
               </button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* Mobile UI */}
           <div className="lg:hidden flex items-center space-x-4">
             <button onClick={onToggleDarkMode} className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors">
               <span className="material-symbols-outlined text-xl">dark_mode</span>
@@ -224,28 +178,21 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-gradient-to-r from-primary to-magenta border-b border-white/10 px-4 py-6 space-y-4 shadow-xl overflow-hidden"
-          >
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={`#${link.id}`} 
-                onClick={(e) => handleScrollTo(e, link.id)} 
-                className={`block font-manrope font-bold py-2 text-lg border-b border-white/10 ${activeSection === link.id ? 'text-white bg-white/10 pl-4 rounded-lg' : 'text-white/70 hover:text-white'}`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+      {isOpen && (
+        <div className="lg:hidden bg-gradient-to-r from-primary to-magenta border-b border-white/10 px-4 py-6 space-y-4 shadow-xl">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={`#${link.id}`} 
+              onClick={(e) => handleScrollTo(e, link.id)} 
+              className={`block font-manrope font-bold py-2 text-lg border-b border-white/10 ${activeSection === link.id ? 'text-white bg-white/10 pl-4 rounded-lg' : 'text-white/70 hover:text-white'}`}
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 };
 
