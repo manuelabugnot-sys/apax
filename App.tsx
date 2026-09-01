@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -5,14 +6,13 @@ import About from './components/About';
 import Features from './components/Features';
 import Team from './components/Team';
 import Services from './components/Services';
+import EmployabilityProgram from './components/EmployabilityProgram';
 import AILab from './components/AILab';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
-import Careers from './components/Careers';
 
 const App: React.FC = () => {
-  // Inicializamos en false (Light Mode) por defecto y eliminamos el check del sistema
   const [darkMode, setDarkMode] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -37,14 +37,14 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', checkScroll);
   }, []);
 
-  const toggleDarkMode = () => setDarkMode(prev => !prev);
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-500">
+    <div className="min-h-screen">
       <Navbar onToggleDarkMode={toggleDarkMode} />
       <main>
         <Hero />
@@ -60,11 +60,11 @@ const App: React.FC = () => {
         
         {/* Soluciones Integrales */}
         <Services />
-
-        {/* Talent Network / Careers */}
-        <Careers />
         
-        {/* Innovation Lab */}
+        {/* Programa Estratégico de Empleabilidad (B2C / Candidatos) */}
+        <EmployabilityProgram />
+        
+        {/* Innovation Lab (Movido aquí) */}
         <AILab />
         
         {/* Contacto */}
@@ -76,9 +76,7 @@ const App: React.FC = () => {
       {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-10 left-10 w-12 h-12 bg-white dark:bg-slate-800 text-slate-800 dark:text-white rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-all duration-300 z-40 hover:scale-110 hover:-translate-y-1 ${
-          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-        }`}
+        className={`fixed bottom-10 left-10 w-12 h-12 bg-white dark:bg-slate-800 text-slate-800 dark:text-white rounded-full shadow-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-all duration-300 z-40 hover:scale-110 hover:-translate-y-1 ${showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
       >
         <span className="material-symbols-outlined">arrow_upward</span>
       </button>
