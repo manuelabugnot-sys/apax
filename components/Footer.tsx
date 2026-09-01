@@ -58,6 +58,7 @@ const Footer: React.FC = () => {
               <li><a href="#quienes-somos" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Quiénes somos</a></li>
               <li><a href="#servicios" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Servicios</a></li>
               <li><a href="#empleabilidad" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Empleabilidad</a></li>
+              <li><a href="#talento-apax" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Talento Apax</a></li>
               <li><a href="#equipo" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Nuestro equipo</a></li>
               <li><a href="#ai-lab" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Innovation Lab</a></li>
               <li><a href="#contacto" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Contacto</a></li>
