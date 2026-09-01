@@ -102,8 +102,8 @@ const TalentoApax: React.FC = () => {
     setStatus('submitting');
 
     try {
-      // Usamos formsubmit.co con AJAX
-      const response = await fetch("https://formsubmit.co/ajax/manuelabugnot@gmail.com", {
+      // Usamos formsubmit.co con AJAX dirigido a cv@apaxmanagement.com
+      const response = await fetch("https://formsubmit.co/ajax/cv@apaxmanagement.com", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
