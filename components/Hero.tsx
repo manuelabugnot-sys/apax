@@ -38,28 +38,28 @@ const Hero: React.FC = () => {
             Ofrecemos soluciones estratégicas de RRHH que conecten los objetivos organizacionales con la excelencia del equipo.
           </p>
           
-          <div className="flex flex-wrap gap-4 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <button 
               id="hero-btn-contacto"
               onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-gradient text-white px-8 py-4.5 rounded-full text-base sm:text-lg font-bold shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+              className="btn-gradient text-white px-9 py-5 rounded-full text-base sm:text-lg font-extrabold shadow-2xl shadow-primary/40 hover:shadow-primary/60 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer border-2 border-white/20"
             >
               <span>Agendar Consultoría</span>
-              <span className="material-symbols-outlined text-xl">arrow_forward</span>
+              <span className="material-symbols-outlined text-2xl font-bold">arrow_forward</span>
             </button>
             <button 
               id="hero-btn-servicios"
               onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-white/70 dark:bg-white/10 backdrop-blur-md border border-slate-200 dark:border-white/10 px-8 py-4.5 rounded-full text-base sm:text-lg font-bold hover:bg-white dark:hover:bg-white/20 transition-all text-slate-800 dark:text-white shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
+              className="bg-white/85 dark:bg-white/15 backdrop-blur-lg border-2 border-slate-300/80 dark:border-white/20 px-9 py-5 rounded-full text-base sm:text-lg font-extrabold hover:bg-white dark:hover:bg-white/25 transition-all text-slate-900 dark:text-white shadow-md hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
             >
               Soluciones Empresas
             </button>
             <button 
               id="hero-btn-talento-apax"
               onClick={() => document.getElementById('talento-apax')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gradient-to-r from-primary/15 via-[#9d4edd]/20 to-primary/10 dark:from-primary/30 dark:to-[#9d4edd]/30 backdrop-blur-md border border-primary/30 dark:border-[#9d4edd]/40 px-8 py-4.5 rounded-full text-base sm:text-lg font-bold hover:bg-primary/25 dark:hover:bg-[#9d4edd]/40 transition-all text-primary dark:text-violet-200 shadow-sm hover:scale-105 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+              className="bg-gradient-to-r from-primary/20 via-[#9d4edd]/25 to-primary/15 dark:from-primary/35 dark:to-[#9d4edd]/35 backdrop-blur-lg border-2 border-primary/40 dark:border-[#9d4edd]/50 px-9 py-5 rounded-full text-base sm:text-lg font-extrabold hover:bg-primary/30 dark:hover:bg-[#9d4edd]/50 transition-all text-primary dark:text-violet-100 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 flex items-center justify-center gap-2.5 cursor-pointer"
             >
-              <span className="material-symbols-outlined text-xl text-[#9d4edd] dark:text-violet-300">groups</span>
+              <span className="material-symbols-outlined text-2xl text-[#9d4edd] dark:text-violet-300 font-bold">groups</span>
               <span>Talento Apax</span>
             </button>
           </div>
