@@ -7,6 +7,7 @@ import Features from './components/Features';
 import Team from './components/Team';
 import Services from './components/Services';
 import EmployabilityProgram from './components/EmployabilityProgram';
+import TalentoApax from './components/TalentoApax';
 import AILab from './components/AILab';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -63,6 +64,9 @@ const App: React.FC = () => {
         
         {/* Programa Estratégico de Empleabilidad (B2C / Candidatos) */}
         <EmployabilityProgram />
+
+        {/* Sector Talento Apax & Formulario de Postulación de Candidatos */}
+        <TalentoApax />
         
         {/* Innovation Lab (Movido aquí) */}
         <AILab />
