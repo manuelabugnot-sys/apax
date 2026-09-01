@@ -62,12 +62,32 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-  const navLinks = [
+  const mainLinks = [
     { name: 'Inicio', id: 'inicio' },
     { name: 'Quiénes somos', id: 'quienes-somos' },
-    { name: 'Servicios', id: 'servicios' },
-    { name: 'Empleabilidad', id: 'empleabilidad' },
+    { 
+      name: 'Servicios', 
+      id: 'servicios',
+      isDropdown: true,
+      subItems: [
+        { 
+          name: 'Soluciones para Empresas', 
+          id: 'servicios', 
+          desc: 'Consultoría, Selección & Diagnóstico de RRHH',
+          icon: 'business_center'
+        },
+        { 
+          name: 'Programa de Empleabilidad', 
+          id: 'empleabilidad', 
+          desc: 'Puesta a punto de CV, LinkedIn y Entrevistas',
+          icon: 'trending_up'
+        }
+      ]
+    },
+    { name: 'Talento Apax', id: 'talento-apax' },
     { name: 'Equipo', id: 'equipo' },
     { name: 'AI Lab', id: 'ai-lab' },
     { name: 'Contacto', id: 'contacto' },
@@ -81,9 +101,10 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       const scroll = `${totalScroll / windowHeight}`;
       setScrollProgress(Number(scroll));
 
-      // Logic for Active Section
-      const sections = navLinks.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 150; // Offset aumentado por la barra más grande
+      // All tracked section IDs
+      const allSectionIds = ['inicio', 'quienes-somos', 'servicios', 'empleabilidad', 'talento-apax', 'equipo', 'ai-lab', 'contacto'];
+      const sections = allSectionIds.map(id => document.getElementById(id));
+      const scrollPosition = window.scrollY + 150;
 
       for (const section of sections) {
         if (section) {
@@ -101,15 +122,16 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, targetId: string) => {
     e.preventDefault();
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 100; // Ajustado para la barra más alta
+      const offset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       setIsOpen(false);
+      setServicesDropdownOpen(false);
       setActiveSection(targetId);
     }
   };
@@ -136,21 +158,84 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name}
-                href={`#${link.id}`}
-                onClick={(e) => handleScrollTo(e, link.id)}
-                className={`
-                  font-manrope font-bold transition-all duration-300 tracking-tight text-[14px] whitespace-nowrap px-4 py-2 rounded-full border border-transparent
-                  ${activeSection === link.id 
-                    ? 'text-white bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)] border-white/20 scale-105' 
-                    : 'text-white/90 hover:text-white hover:bg-white/10 hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]'}
-                `}
-              >
-                {link.name}
-              </a>
-            ))}
+            {mainLinks.map((link) => {
+              if (link.isDropdown && link.subItems) {
+                const isDropdownActive = activeSection === 'servicios' || activeSection === 'empleabilidad';
+                return (
+                  <div 
+                    key={link.name} 
+                    className="relative group"
+                    onMouseEnter={() => setServicesDropdownOpen(true)}
+                    onMouseLeave={() => setServicesDropdownOpen(false)}
+                  >
+                    <button
+                      type="button"
+                      onClick={(e) => handleScrollTo(e, 'servicios')}
+                      className={`
+                        font-manrope font-bold transition-all duration-300 tracking-tight text-[14px] whitespace-nowrap px-4 py-2 rounded-full border border-transparent inline-flex items-center gap-1.5 cursor-pointer
+                        ${isDropdownActive
+                          ? 'text-white bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)] border-white/20 scale-105' 
+                          : 'text-white/90 hover:text-white hover:bg-white/10 hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]'}
+                      `}
+                    >
+                      <span>{link.name}</span>
+                      <span className={`material-symbols-outlined text-base transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`}>
+                        expand_more
+                      </span>
+                    </button>
+
+                    {/* Dropdown Menu Glassmorphism */}
+                    <div 
+                      className={`absolute top-full left-0 mt-2 w-72 bg-gradient-to-b from-[#0a008a]/95 to-[#9d4edd]/95 backdrop-blur-xl border border-white/20 rounded-2xl p-2.5 shadow-2xl transition-all duration-200 z-50 ${
+                        servicesDropdownOpen ? 'opacity-100 translate-y-0 pointer-events-auto visible' : 'opacity-0 -translate-y-2 pointer-events-none invisible'
+                      }`}
+                    >
+                      {link.subItems.map((sub) => (
+                        <a
+                          key={sub.id}
+                          href={`#${sub.id}`}
+                          onClick={(e) => handleScrollTo(e, sub.id)}
+                          className={`flex items-start gap-3 p-3 rounded-xl transition-all group/item ${
+                            activeSection === sub.id 
+                              ? 'bg-white/20 text-white shadow-sm border border-white/20' 
+                              : 'text-white/85 hover:text-white hover:bg-white/10'
+                          }`}
+                        >
+                          <div className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/25 transition-colors">
+                            <span className="material-symbols-outlined text-lg">{sub.icon}</span>
+                          </div>
+                          <div>
+                            <div className="font-bold text-xs sm:text-sm text-white flex items-center gap-1">
+                              {sub.name}
+                              <span className="material-symbols-outlined text-xs opacity-0 group-hover/item:opacity-100 transition-opacity">chevron_right</span>
+                            </div>
+                            <div className="text-[11px] text-white/70 leading-tight mt-0.5">
+                              {sub.desc}
+                            </div>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <a 
+                  key={link.name}
+                  href={`#${link.id}`}
+                  onClick={(e) => handleScrollTo(e, link.id)}
+                  className={`
+                    font-manrope font-bold transition-all duration-300 tracking-tight text-[14px] whitespace-nowrap px-4 py-2 rounded-full border border-transparent
+                    ${activeSection === link.id 
+                      ? 'text-white bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)] border-white/20 scale-105' 
+                      : 'text-white/90 hover:text-white hover:bg-white/10 hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]'}
+                  `}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
             <div className="pl-4 flex items-center gap-2">
               <button 
                 onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
@@ -179,17 +264,54 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       </div>
 
       {isOpen && (
-        <div className="lg:hidden bg-gradient-to-r from-primary to-magenta border-b border-white/10 px-4 py-6 space-y-4 shadow-xl">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={`#${link.id}`} 
-              onClick={(e) => handleScrollTo(e, link.id)} 
-              className={`block font-manrope font-bold py-2 text-lg border-b border-white/10 ${activeSection === link.id ? 'text-white bg-white/10 pl-4 rounded-lg' : 'text-white/70 hover:text-white'}`}
-            >
-              {link.name}
-            </a>
-          ))}
+        <div className="lg:hidden bg-gradient-to-r from-primary to-magenta border-b border-white/10 px-4 py-6 space-y-3 shadow-xl max-h-[80vh] overflow-y-auto">
+          {mainLinks.map((link) => {
+            if (link.isDropdown && link.subItems) {
+              return (
+                <div key={link.name} className="border-b border-white/10 pb-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    className="w-full flex items-center justify-between font-manrope font-bold py-2 text-lg text-white/90"
+                  >
+                    <span>{link.name}</span>
+                    <span className={`material-symbols-outlined text-xl transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`}>
+                      expand_more
+                    </span>
+                  </button>
+
+                  {mobileServicesOpen && (
+                    <div className="pl-4 py-2 space-y-2 bg-white/5 rounded-xl mt-1">
+                      {link.subItems.map((sub) => (
+                        <a
+                          key={sub.id}
+                          href={`#${sub.id}`}
+                          onClick={(e) => handleScrollTo(e, sub.id)}
+                          className={`flex items-center gap-2.5 py-2 px-3 rounded-lg text-sm font-bold ${
+                            activeSection === sub.id ? 'text-white bg-white/20' : 'text-white/80 hover:text-white'
+                          }`}
+                        >
+                          <span className="material-symbols-outlined text-base">{sub.icon}</span>
+                          <span>{sub.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return (
+              <a 
+                key={link.name} 
+                href={`#${link.id}`} 
+                onClick={(e) => handleScrollTo(e, link.id)} 
+                className={`block font-manrope font-bold py-2 text-lg border-b border-white/10 ${activeSection === link.id ? 'text-white bg-white/10 pl-4 rounded-lg' : 'text-white/70 hover:text-white'}`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </div>
       )}
     </nav>
