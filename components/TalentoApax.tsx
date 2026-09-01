@@ -151,7 +151,7 @@ const TalentoApax: React.FC = () => {
   };
 
   return (
-    <section id="talento-apax" className="py-24 bg-white dark:bg-slate-900 scroll-mt-20 relative overflow-hidden">
+    <section id="talento-apax" className="py-24 bg-white dark:bg-slate-900 scroll-mt-28 relative overflow-hidden">
       {/* Background soft ambient shapes */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 dark:bg-primary/10 rounded-full filter blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-accent/5 dark:bg-accent/10 rounded-full filter blur-3xl pointer-events-none"></div>
