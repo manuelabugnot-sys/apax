@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export const BrandLogo: React.FC<{ className?: string, isFooter?: boolean }> = ({ 
   className = "h-16", 
@@ -65,6 +65,9 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const mainLinks = [
     { name: 'Inicio', id: 'inicio' },
     { name: 'Quiénes somos', id: 'quienes-somos' },
@@ -115,6 +118,17 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
     { name: 'Contacto', id: 'contacto' },
   ];
 
+  // Cerrar dropdown al hacer click afuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setServicesDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       // Logic for Progress Bar
@@ -143,6 +157,19 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    setServicesDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setServicesDropdownOpen(false);
+    }, 200);
+  };
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, targetId: string) => {
     e.preventDefault();
@@ -186,15 +213,20 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
                 return (
                   <div 
                     key={link.name} 
+                    ref={dropdownRef}
                     className="relative group"
-                    onMouseEnter={() => setServicesDropdownOpen(true)}
-                    onMouseLeave={() => setServicesDropdownOpen(false)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     <button
                       type="button"
-                      onClick={(e) => handleScrollTo(e, 'servicios')}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setServicesDropdownOpen((prev) => !prev);
+                      }}
                       className={`
-                        font-manrope font-bold transition-all duration-300 tracking-tight text-[14px] whitespace-nowrap px-4 py-2 rounded-full border border-transparent inline-flex items-center gap-1.5 cursor-pointer
+                        font-manrope font-bold transition-all duration-300 tracking-tight text-[14px] whitespace-nowrap px-4 py-2 rounded-full border border-transparent inline-flex items-center gap-1.5 cursor-pointer select-none
                         ${isDropdownActive
                           ? 'text-white bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)] border-white/20 scale-105' 
                           : 'text-white/90 hover:text-white hover:bg-white/10 hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]'}
@@ -206,56 +238,58 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
                       </span>
                     </button>
 
-                    {/* Dropdown Menu Glassmorphism */}
+                    {/* Dropdown Menu Glassmorphism with invisible bridge */}
                     <div 
-                      className={`absolute top-full left-0 mt-2 w-96 bg-gradient-to-b from-[#0a008a]/95 via-[#18007a]/95 to-[#9d4edd]/95 backdrop-blur-2xl border border-white/20 rounded-2xl p-4 shadow-2xl transition-all duration-200 z-50 ${
+                      className={`absolute top-full left-0 pt-2 w-96 transition-all duration-200 z-50 ${
                         servicesDropdownOpen ? 'opacity-100 translate-y-0 pointer-events-auto visible' : 'opacity-0 -translate-y-2 pointer-events-none invisible'
                       }`}
                     >
-                      {link.serviceGroups.map((group, gIdx) => (
-                        <div key={gIdx} className={gIdx > 0 ? 'mt-3 pt-3 border-t border-white/15' : ''}>
-                          <div className="text-[11px] font-extrabold uppercase tracking-wider text-violet-200 px-3 mb-1.5 flex items-center justify-between">
-                            <span>{group.groupTitle}</span>
-                            {group.groupTitle === 'Soluciones para Empresas' && (
-                              <a 
-                                href="#servicios" 
-                                onClick={(e) => handleScrollTo(e, 'servicios')}
-                                className="text-[10px] text-white/70 hover:text-white underline font-semibold normal-case"
-                              >
-                                Ver todos
-                              </a>
-                            )}
-                          </div>
-                          
-                          <div className="space-y-1">
-                            {group.items.map((sub) => (
-                              <a
-                                key={sub.id}
-                                href={`#${sub.id}`}
-                                onClick={(e) => handleScrollTo(e, sub.id)}
-                                className={`flex items-start gap-3 p-2.5 rounded-xl transition-all group/item ${
-                                  activeSection === sub.id 
-                                    ? 'bg-white/20 text-white shadow-sm border border-white/25' 
-                                    : 'text-white/85 hover:text-white hover:bg-white/10'
-                                }`}
-                              >
-                                <div className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/25 transition-colors">
-                                  <span className="material-symbols-outlined text-lg">{sub.icon}</span>
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="font-bold text-xs sm:text-sm text-white flex items-center justify-between">
-                                    <span>{sub.name}</span>
-                                    <span className="material-symbols-outlined text-xs opacity-0 group-hover/item:opacity-100 transition-opacity">arrow_forward</span>
+                      <div className="bg-gradient-to-b from-[#0a008a]/95 via-[#18007a]/95 to-[#9d4edd]/95 backdrop-blur-2xl border border-white/20 rounded-2xl p-4 shadow-2xl">
+                        {link.serviceGroups.map((group, gIdx) => (
+                          <div key={gIdx} className={gIdx > 0 ? 'mt-3 pt-3 border-t border-white/15' : ''}>
+                            <div className="text-[11px] font-extrabold uppercase tracking-wider text-violet-200 px-3 mb-1.5 flex items-center justify-between">
+                              <span>{group.groupTitle}</span>
+                              {group.groupTitle === 'Soluciones para Empresas' && (
+                                <a 
+                                  href="#servicios" 
+                                  onClick={(e) => handleScrollTo(e, 'servicios')}
+                                  className="text-[10px] text-white/70 hover:text-white underline font-semibold normal-case cursor-pointer"
+                                >
+                                  Ver todos
+                                </a>
+                              )}
+                            </div>
+                            
+                            <div className="space-y-1">
+                              {group.items.map((sub) => (
+                                <a
+                                  key={sub.id}
+                                  href={`#${sub.id}`}
+                                  onClick={(e) => handleScrollTo(e, sub.id)}
+                                  className={`flex items-start gap-3 p-2.5 rounded-xl transition-all group/item cursor-pointer ${
+                                    activeSection === sub.id 
+                                      ? 'bg-white/20 text-white shadow-sm border border-white/25' 
+                                      : 'text-white/85 hover:text-white hover:bg-white/10'
+                                  }`}
+                                >
+                                  <div className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/25 transition-colors">
+                                    <span className="material-symbols-outlined text-lg">{sub.icon}</span>
                                   </div>
-                                  <div className="text-[11px] text-white/70 leading-tight mt-0.5 truncate">
-                                    {sub.desc}
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-bold text-xs sm:text-sm text-white flex items-center justify-between">
+                                      <span>{sub.name}</span>
+                                      <span className="material-symbols-outlined text-xs opacity-0 group-hover/item:opacity-100 transition-opacity">arrow_forward</span>
+                                    </div>
+                                    <div className="text-[11px] text-white/70 leading-tight mt-0.5 truncate">
+                                      {sub.desc}
+                                    </div>
                                   </div>
-                                </div>
-                              </a>
-                            ))}
+                                </a>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
                 );
