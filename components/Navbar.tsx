@@ -72,18 +72,40 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       name: 'Servicios', 
       id: 'servicios',
       isDropdown: true,
-      subItems: [
-        { 
-          name: 'Soluciones para Empresas', 
-          id: 'servicios', 
-          desc: 'Consultoría, Selección & Diagnóstico de RRHH',
-          icon: 'business_center'
+      serviceGroups: [
+        {
+          groupTitle: 'Soluciones para Empresas',
+          items: [
+            { 
+              name: 'Reclutamiento y Selección', 
+              id: 'reclutamiento', 
+              desc: 'Headhunting y selección cultural',
+              icon: 'person_search'
+            },
+            { 
+              name: 'Gestión del Talento', 
+              id: 'gestion', 
+              desc: 'Mapeo de talento y planes de carrera',
+              icon: 'psychology'
+            },
+            { 
+              name: 'Consultoría Estratégica', 
+              id: 'consultoria', 
+              desc: 'Estructuras y KPIs de RRHH',
+              icon: 'hub'
+            }
+          ]
         },
-        { 
-          name: 'Programa de Empleabilidad', 
-          id: 'empleabilidad', 
-          desc: 'Puesta a punto de CV, LinkedIn y Entrevistas',
-          icon: 'trending_up'
+        {
+          groupTitle: 'Para Profesionales',
+          items: [
+            { 
+              name: 'Programa de Empleabilidad', 
+              id: 'empleabilidad', 
+              desc: 'CV, LinkedIn y Práctica de Entrevistas',
+              icon: 'trending_up'
+            }
+          ]
         }
       ]
     },
@@ -102,7 +124,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       setScrollProgress(Number(scroll));
 
       // All tracked section IDs
-      const allSectionIds = ['inicio', 'quienes-somos', 'servicios', 'empleabilidad', 'talento-apax', 'equipo', 'ai-lab', 'contacto'];
+      const allSectionIds = ['inicio', 'quienes-somos', 'servicios', 'reclutamiento', 'gestion', 'consultoria', 'empleabilidad', 'talento-apax', 'equipo', 'ai-lab', 'contacto'];
       const sections = allSectionIds.map(id => document.getElementById(id));
       const scrollPosition = window.scrollY + 150;
 
@@ -159,8 +181,8 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
 
           <div className="hidden lg:flex items-center space-x-1">
             {mainLinks.map((link) => {
-              if (link.isDropdown && link.subItems) {
-                const isDropdownActive = activeSection === 'servicios' || activeSection === 'empleabilidad';
+              if (link.isDropdown && link.serviceGroups) {
+                const isDropdownActive = ['servicios', 'reclutamiento', 'gestion', 'consultoria', 'empleabilidad'].includes(activeSection);
                 return (
                   <div 
                     key={link.name} 
@@ -186,34 +208,53 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
 
                     {/* Dropdown Menu Glassmorphism */}
                     <div 
-                      className={`absolute top-full left-0 mt-2 w-72 bg-gradient-to-b from-[#0a008a]/95 to-[#9d4edd]/95 backdrop-blur-xl border border-white/20 rounded-2xl p-2.5 shadow-2xl transition-all duration-200 z-50 ${
+                      className={`absolute top-full left-0 mt-2 w-96 bg-gradient-to-b from-[#0a008a]/95 via-[#18007a]/95 to-[#9d4edd]/95 backdrop-blur-2xl border border-white/20 rounded-2xl p-4 shadow-2xl transition-all duration-200 z-50 ${
                         servicesDropdownOpen ? 'opacity-100 translate-y-0 pointer-events-auto visible' : 'opacity-0 -translate-y-2 pointer-events-none invisible'
                       }`}
                     >
-                      {link.subItems.map((sub) => (
-                        <a
-                          key={sub.id}
-                          href={`#${sub.id}`}
-                          onClick={(e) => handleScrollTo(e, sub.id)}
-                          className={`flex items-start gap-3 p-3 rounded-xl transition-all group/item ${
-                            activeSection === sub.id 
-                              ? 'bg-white/20 text-white shadow-sm border border-white/20' 
-                              : 'text-white/85 hover:text-white hover:bg-white/10'
-                          }`}
-                        >
-                          <div className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/25 transition-colors">
-                            <span className="material-symbols-outlined text-lg">{sub.icon}</span>
+                      {link.serviceGroups.map((group, gIdx) => (
+                        <div key={gIdx} className={gIdx > 0 ? 'mt-3 pt-3 border-t border-white/15' : ''}>
+                          <div className="text-[11px] font-extrabold uppercase tracking-wider text-violet-200 px-3 mb-1.5 flex items-center justify-between">
+                            <span>{group.groupTitle}</span>
+                            {group.groupTitle === 'Soluciones para Empresas' && (
+                              <a 
+                                href="#servicios" 
+                                onClick={(e) => handleScrollTo(e, 'servicios')}
+                                className="text-[10px] text-white/70 hover:text-white underline font-semibold normal-case"
+                              >
+                                Ver todos
+                              </a>
+                            )}
                           </div>
-                          <div>
-                            <div className="font-bold text-xs sm:text-sm text-white flex items-center gap-1">
-                              {sub.name}
-                              <span className="material-symbols-outlined text-xs opacity-0 group-hover/item:opacity-100 transition-opacity">chevron_right</span>
-                            </div>
-                            <div className="text-[11px] text-white/70 leading-tight mt-0.5">
-                              {sub.desc}
-                            </div>
+                          
+                          <div className="space-y-1">
+                            {group.items.map((sub) => (
+                              <a
+                                key={sub.id}
+                                href={`#${sub.id}`}
+                                onClick={(e) => handleScrollTo(e, sub.id)}
+                                className={`flex items-start gap-3 p-2.5 rounded-xl transition-all group/item ${
+                                  activeSection === sub.id 
+                                    ? 'bg-white/20 text-white shadow-sm border border-white/25' 
+                                    : 'text-white/85 hover:text-white hover:bg-white/10'
+                                }`}
+                              >
+                                <div className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/25 transition-colors">
+                                  <span className="material-symbols-outlined text-lg">{sub.icon}</span>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="font-bold text-xs sm:text-sm text-white flex items-center justify-between">
+                                    <span>{sub.name}</span>
+                                    <span className="material-symbols-outlined text-xs opacity-0 group-hover/item:opacity-100 transition-opacity">arrow_forward</span>
+                                  </div>
+                                  <div className="text-[11px] text-white/70 leading-tight mt-0.5 truncate">
+                                    {sub.desc}
+                                  </div>
+                                </div>
+                              </a>
+                            ))}
                           </div>
-                        </a>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -266,7 +307,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       {isOpen && (
         <div className="lg:hidden bg-gradient-to-r from-primary to-magenta border-b border-white/10 px-4 py-6 space-y-3 shadow-xl max-h-[80vh] overflow-y-auto">
           {mainLinks.map((link) => {
-            if (link.isDropdown && link.subItems) {
+            if (link.isDropdown && link.serviceGroups) {
               return (
                 <div key={link.name} className="border-b border-white/10 pb-2">
                   <button
@@ -281,19 +322,29 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
                   </button>
 
                   {mobileServicesOpen && (
-                    <div className="pl-4 py-2 space-y-2 bg-white/5 rounded-xl mt-1">
-                      {link.subItems.map((sub) => (
-                        <a
-                          key={sub.id}
-                          href={`#${sub.id}`}
-                          onClick={(e) => handleScrollTo(e, sub.id)}
-                          className={`flex items-center gap-2.5 py-2 px-3 rounded-lg text-sm font-bold ${
-                            activeSection === sub.id ? 'text-white bg-white/20' : 'text-white/80 hover:text-white'
-                          }`}
-                        >
-                          <span className="material-symbols-outlined text-base">{sub.icon}</span>
-                          <span>{sub.name}</span>
-                        </a>
+                    <div className="pl-2 py-2 space-y-3 bg-white/5 rounded-xl mt-1">
+                      {link.serviceGroups.map((group, gIdx) => (
+                        <div key={gIdx} className="space-y-1.5">
+                          <div className="text-[10px] font-extrabold uppercase tracking-wider text-violet-200 px-2">
+                            {group.groupTitle}
+                          </div>
+                          {group.items.map((sub) => (
+                            <a
+                              key={sub.id}
+                              href={`#${sub.id}`}
+                              onClick={(e) => handleScrollTo(e, sub.id)}
+                              className={`flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-xs font-bold ${
+                                activeSection === sub.id ? 'text-white bg-white/20' : 'text-white/85 hover:text-white'
+                              }`}
+                            >
+                              <span className="material-symbols-outlined text-base">{sub.icon}</span>
+                              <div className="flex-1">
+                                <div>{sub.name}</div>
+                                <div className="text-[10px] text-white/60 font-normal">{sub.desc}</div>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
                       ))}
                     </div>
                   )}
