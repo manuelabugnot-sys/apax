@@ -13,7 +13,7 @@ const EmployabilityProgram: React.FC<EmployabilityProgramProps> = ({ onContactCl
       const message = encodeURIComponent(
         '¡Hola Apax Management! Me gustaría coordinar para arrancar el Programa Estratégico de Empleabilidad (Perfil & Entrevistas).'
       );
-      window.open(`https://wa.me/5491156023106?text=${message}`, '_blank', 'noopener,noreferrer');
+      window.open(`https://wa.me/5491178260450?text=${message}`, '_blank', 'noopener,noreferrer');
     }
   };
 
