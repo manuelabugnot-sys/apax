@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} APAX MANAGEMENT. TODOS LOS DERECHOS RESERVADOS.
           </p>
           <div className="flex gap-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.15em]">
-            <span>Buenos Aires | Global Talent</span>
+            <span>Buenos Aires • México • Global Talent</span>
           </div>
         </div>
       </div>
