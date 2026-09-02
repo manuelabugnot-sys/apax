@@ -1,19 +1,19 @@
 import React from 'react';
+import { useCountryWhatsApp } from '../hooks/useCountryWhatsApp';
 
 interface EmployabilityProgramProps {
   onContactClick?: () => void;
 }
 
 const EmployabilityProgram: React.FC<EmployabilityProgramProps> = ({ onContactClick }) => {
+  const { getUrl } = useCountryWhatsApp();
+
   const handleCTAClick = () => {
     if (onContactClick) {
       onContactClick();
     } else {
-      // Direct WhatsApp link or smooth scroll to contact
-      const message = encodeURIComponent(
-        '¡Hola Apax Management! Me gustaría coordinar para arrancar el Programa Estratégico de Empleabilidad (Perfil & Entrevistas).'
-      );
-      window.open(`https://wa.me/5491178260450?text=${message}`, '_blank', 'noopener,noreferrer');
+      const customMessage = '¡Hola Apax Management! Me gustaría coordinar para arrancar el Programa Estratégico de Empleabilidad (Perfil & Entrevistas).';
+      window.open(getUrl(customMessage), '_blank', 'noopener,noreferrer');
     }
   };
 
