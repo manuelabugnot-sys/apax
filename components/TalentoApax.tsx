@@ -308,7 +308,7 @@ const TalentoApax: React.FC = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        placeholder="Ej: +54 9 11 ..."
+                        placeholder="Ej: +54 9 11 ... o +52 1 442 ..."
                         className={inputClasses}
                         disabled={status === 'submitting'}
                       />
