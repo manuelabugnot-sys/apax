@@ -2,6 +2,17 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white pt-20 pb-12 border-t border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,17 +63,108 @@ const Footer: React.FC = () => {
 
           {/* Columna 2: Navegación */}
           <div className="lg:pl-8">
-            <h4 className="text-sm font-black uppercase tracking-widest mb-8 text-primary dark:text-accent border-b-2 border-primary/10 dark:border-accent/10 pb-2 inline-block">Navegación</h4>
-            <ul className="space-y-4">
-              <li><a href="#inicio" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Inicio</a></li>
-              <li><a href="#quienes-somos" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Quiénes somos</a></li>
-              <li><a href="#servicios" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Servicios</a></li>
-              <li><a href="#empleabilidad" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Empleabilidad</a></li>
-              <li><a href="#talento-apax" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Talento Apax</a></li>
-              <li><a href="#equipo" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Nuestro equipo</a></li>
-              <li><a href="#ai-lab" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Innovation Lab</a></li>
-              <li><a href="#contacto" className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-sm font-bold">Contacto</a></li>
-            </ul>
+            <h4 className="text-sm font-black uppercase tracking-widest mb-6 text-primary dark:text-accent border-b-2 border-primary/10 dark:border-accent/10 pb-2 inline-block">
+              Navegación
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+              <div className="space-y-4">
+                <div>
+                  <a 
+                    href="#inicio" 
+                    onClick={(e) => handleScrollTo(e, 'inicio')}
+                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
+                  >
+                    Inicio
+                  </a>
+                </div>
+
+                {/* Grupo: Nuestra Empresa */}
+                <div className="space-y-2">
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
+                    Nuestra Empresa
+                  </span>
+                  <ul className="space-y-2 pl-2.5 border-l-2 border-primary/20 dark:border-accent/20">
+                    <li>
+                      <a 
+                        href="#quienes-somos" 
+                        onClick={(e) => handleScrollTo(e, 'quienes-somos')}
+                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                      >
+                        Quiénes somos
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#equipo" 
+                        onClick={(e) => handleScrollTo(e, 'equipo')}
+                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                      >
+                        Nuestro Equipo
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <a 
+                    href="#talento-apax" 
+                    onClick={(e) => handleScrollTo(e, 'talento-apax')}
+                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
+                  >
+                    Talento Apax
+                  </a>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {/* Grupo: Servicios */}
+                <div className="space-y-2">
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
+                    Servicios
+                  </span>
+                  <ul className="space-y-2 pl-2.5 border-l-2 border-primary/20 dark:border-accent/20">
+                    <li>
+                      <a 
+                        href="#servicios" 
+                        onClick={(e) => handleScrollTo(e, 'servicios')}
+                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                      >
+                        Soluciones para Empresas
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#empleabilidad" 
+                        onClick={(e) => handleScrollTo(e, 'empleabilidad')}
+                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                      >
+                        Programa de Empleabilidad
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <a 
+                    href="#ai-lab" 
+                    onClick={(e) => handleScrollTo(e, 'ai-lab')}
+                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
+                  >
+                    AI Lab
+                  </a>
+                </div>
+
+                <div>
+                  <a 
+                    href="#contacto" 
+                    onClick={(e) => handleScrollTo(e, 'contacto')}
+                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
+                  >
+                    Contacto
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Columna 3: Newsletter */}
