@@ -62,19 +62,43 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const aboutDropdownRef = useRef<HTMLDivElement>(null);
+  const servicesDropdownRef = useRef<HTMLDivElement>(null);
+  const aboutHoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const servicesHoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const mainLinks = [
     { name: 'Inicio', id: 'inicio' },
-    { name: 'Quiénes somos', id: 'quienes-somos' },
+    { 
+      name: 'Nuestra Empresa', 
+      id: 'quienes-somos',
+      isDropdown: true,
+      dropdownType: 'about' as const,
+      items: [
+        { 
+          name: 'Quiénes somos', 
+          id: 'quienes-somos', 
+          desc: 'Propósito, visión y compromiso',
+          icon: 'corporate_fare'
+        },
+        { 
+          name: 'Nuestro Equipo', 
+          id: 'equipo', 
+          desc: 'Cofundadoras y liderazgo en RRHH',
+          icon: 'groups'
+        }
+      ]
+    },
     { 
       name: 'Servicios', 
       id: 'servicios',
       isDropdown: true,
+      dropdownType: 'services' as const,
       serviceGroups: [
         {
           groupTitle: 'Soluciones para Empresas',
@@ -113,15 +137,18 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       ]
     },
     { name: 'Talento Apax', id: 'talento-apax' },
-    { name: 'Equipo', id: 'equipo' },
     { name: 'AI Lab', id: 'ai-lab' },
     { name: 'Contacto', id: 'contacto' },
   ];
 
-  // Cerrar dropdown al hacer click afuera
+  // Cerrar dropdowns al hacer click afuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (aboutDropdownRef.current && !aboutDropdownRef.current.contains(target)) {
+        setAboutDropdownOpen(false);
+      }
+      if (servicesDropdownRef.current && !servicesDropdownRef.current.contains(target)) {
         setServicesDropdownOpen(false);
       }
     };
@@ -158,15 +185,28 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleMouseEnter = () => {
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
+  const handleAboutMouseEnter = () => {
+    if (aboutHoverTimeoutRef.current) {
+      clearTimeout(aboutHoverTimeoutRef.current);
+    }
+    setAboutDropdownOpen(true);
+  };
+
+  const handleAboutMouseLeave = () => {
+    aboutHoverTimeoutRef.current = setTimeout(() => {
+      setAboutDropdownOpen(false);
+    }, 200);
+  };
+
+  const handleServicesMouseEnter = () => {
+    if (servicesHoverTimeoutRef.current) {
+      clearTimeout(servicesHoverTimeoutRef.current);
     }
     setServicesDropdownOpen(true);
   };
 
-  const handleMouseLeave = () => {
-    hoverTimeoutRef.current = setTimeout(() => {
+  const handleServicesMouseLeave = () => {
+    servicesHoverTimeoutRef.current = setTimeout(() => {
       setServicesDropdownOpen(false);
     }, 200);
   };
@@ -180,6 +220,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       setIsOpen(false);
+      setAboutDropdownOpen(false);
       setServicesDropdownOpen(false);
       setActiveSection(targetId);
     }
@@ -208,15 +249,86 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
 
           <div className="hidden lg:flex items-center space-x-1">
             {mainLinks.map((link) => {
-              if (link.isDropdown && link.serviceGroups) {
+              if (link.isDropdown && link.dropdownType === 'about' && link.items) {
+                const isDropdownActive = ['quienes-somos', 'equipo'].includes(activeSection);
+                return (
+                  <div 
+                    key={link.name} 
+                    ref={aboutDropdownRef}
+                    className="relative group"
+                    onMouseEnter={handleAboutMouseEnter}
+                    onMouseLeave={handleAboutMouseLeave}
+                  >
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setAboutDropdownOpen((prev) => !prev);
+                      }}
+                      className={`
+                        font-manrope font-bold transition-all duration-300 tracking-tight text-[14px] whitespace-nowrap px-4 py-2 rounded-full border border-transparent inline-flex items-center gap-1.5 cursor-pointer select-none
+                        ${isDropdownActive
+                          ? 'text-white bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)] border-white/20 scale-105' 
+                          : 'text-white/90 hover:text-white hover:bg-white/10 hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]'}
+                      `}
+                    >
+                      <span>{link.name}</span>
+                      <span className={`material-symbols-outlined text-base transition-transform duration-200 ${aboutDropdownOpen ? 'rotate-180' : ''}`}>
+                        expand_more
+                      </span>
+                    </button>
+
+                    {/* Dropdown Menu Glassmorphism */}
+                    <div 
+                      className={`absolute top-full left-0 pt-2 w-80 transition-all duration-200 z-50 ${
+                        aboutDropdownOpen ? 'opacity-100 translate-y-0 pointer-events-auto visible' : 'opacity-0 -translate-y-2 pointer-events-none invisible'
+                      }`}
+                    >
+                      <div className="bg-gradient-to-b from-[#0a008a]/95 via-[#18007a]/95 to-[#9d4edd]/95 backdrop-blur-2xl border border-white/20 rounded-2xl p-3.5 shadow-2xl space-y-1">
+                        <div className="text-[11px] font-extrabold uppercase tracking-wider text-violet-200 px-3 py-1 mb-1">
+                          Conozca Apax
+                        </div>
+                        {link.items.map((sub) => (
+                          <a
+                            key={sub.id}
+                            href={`#${sub.id}`}
+                            onClick={(e) => handleScrollTo(e, sub.id)}
+                            className={`flex items-start gap-3 p-2.5 rounded-xl transition-all group/item cursor-pointer ${
+                              activeSection === sub.id 
+                                ? 'bg-white/20 text-white shadow-sm border border-white/25' 
+                                : 'text-white/85 hover:text-white hover:bg-white/10'
+                            }`}
+                          >
+                            <div className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-white/25 transition-colors">
+                              <span className="material-symbols-outlined text-lg">{sub.icon}</span>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="font-bold text-xs sm:text-sm text-white flex items-center justify-between">
+                                <span>{sub.name}</span>
+                                <span className="material-symbols-outlined text-xs opacity-0 group-hover/item:opacity-100 transition-opacity">arrow_forward</span>
+                              </div>
+                              <div className="text-[11px] text-white/70 leading-tight mt-0.5">
+                                {sub.desc}
+                              </div>
+                            </div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (link.isDropdown && link.dropdownType === 'services' && link.serviceGroups) {
                 const isDropdownActive = ['servicios', 'reclutamiento', 'gestion', 'consultoria', 'empleabilidad'].includes(activeSection);
                 return (
                   <div 
                     key={link.name} 
-                    ref={dropdownRef}
+                    ref={servicesDropdownRef}
                     className="relative group"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={handleServicesMouseEnter}
+                    onMouseLeave={handleServicesMouseLeave}
                   >
                     <button
                       type="button"
@@ -341,7 +453,45 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
       {isOpen && (
         <div className="lg:hidden bg-gradient-to-r from-primary to-magenta border-b border-white/10 px-4 py-6 space-y-3 shadow-xl max-h-[80vh] overflow-y-auto">
           {mainLinks.map((link) => {
-            if (link.isDropdown && link.serviceGroups) {
+            if (link.isDropdown && link.dropdownType === 'about' && link.items) {
+              return (
+                <div key={link.name} className="border-b border-white/10 pb-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+                    className="w-full flex items-center justify-between font-manrope font-bold py-2 text-lg text-white/90"
+                  >
+                    <span>{link.name}</span>
+                    <span className={`material-symbols-outlined text-xl transition-transform ${mobileAboutOpen ? 'rotate-180' : ''}`}>
+                      expand_more
+                    </span>
+                  </button>
+
+                  {mobileAboutOpen && (
+                    <div className="pl-2 py-2 space-y-2 bg-white/5 rounded-xl mt-1">
+                      {link.items.map((sub) => (
+                        <a
+                          key={sub.id}
+                          href={`#${sub.id}`}
+                          onClick={(e) => handleScrollTo(e, sub.id)}
+                          className={`flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-xs font-bold ${
+                            activeSection === sub.id ? 'text-white bg-white/20' : 'text-white/85 hover:text-white'
+                          }`}
+                        >
+                          <span className="material-symbols-outlined text-base">{sub.icon}</span>
+                          <div className="flex-1">
+                            <div>{sub.name}</div>
+                            <div className="text-[10px] text-white/60 font-normal">{sub.desc}</div>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            if (link.isDropdown && link.dropdownType === 'services' && link.serviceGroups) {
               return (
                 <div key={link.name} className="border-b border-white/10 pb-2">
                   <button
