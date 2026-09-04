@@ -1,35 +1,42 @@
-
 import React, { useState } from 'react';
 import { useCountryWhatsApp } from '../hooks/useCountryWhatsApp';
 
 const Contact: React.FC = () => {
   const { country, contacts } = useCountryWhatsApp();
-  // Enhanced input classes with focus scale and border transition
-  const inputClasses = "w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 outline-none transition-all duration-300 placeholder:text-slate-400 text-slate-900 dark:text-white focus:scale-[1.02] focus:border-primary dark:focus:border-accent focus:ring-4 focus:ring-primary/10 dark:focus:ring-accent/10 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed";
+  
+  const inputClasses = 
+    "w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 " +
+    "rounded-xl px-4 py-3 outline-none transition-all duration-300 placeholder:text-slate-400 " +
+    "text-slate-900 dark:text-white focus:scale-[1.02] focus:border-primary dark:focus:border-accent " +
+    "focus:ring-4 focus:ring-primary/10 dark:focus:ring-accent/10 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed";
 
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
-    message: ''
+    message: '',
+    _honey: '' // Campo oculto anti-spam
   });
 
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('submitting');
     
+    // Si un bot llena el campo oculto, simulamos éxito pero no enviamos nada
+    if (formData._honey) {
+      setStatus('success');
+      return;
+    }
+
+    setStatus('submitting');
+
     try {
-      // Utilizamos FormSubmit.co con el flag /ajax para que no redireccione la página
       const response = await fetch("https://formsubmit.co/ajax/hola@apaxmanagement.com", {
         method: "POST",
         headers: { 
@@ -42,14 +49,14 @@ const Contact: React.FC = () => {
           empresa: formData.company,
           email: formData.email,
           mensaje: formData.message,
-          _template: "table", // Formato del email
-          _captcha: "false"   // Desactivar captcha para este ejemplo (opcional)
+          _template: "table",
+          _captcha: "false"
         })
       });
 
       if (response.ok) {
         setStatus('success');
-        setFormData({ name: '', company: '', email: '', message: '' });
+        setFormData({ name: '', company: '', email: '', message: '', _honey: '' });
       } else {
         setStatus('error');
       }
@@ -63,15 +70,20 @@ const Contact: React.FC = () => {
     <section id="contacto" className="py-24 bg-slate-50 dark:bg-slate-900/50 scroll-mt-20">
       <div className="max-w-[95%] 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          
+          {/* Columna Izquierda: Información de Contacto */}
           <div>
             <div className="mb-8">
-              <h2 className="text-4xl md:text-6xl font-display font-bold text-primary dark:text-white tracking-tight mb-6">Contacto</h2>
+              <h2 className="text-4xl md:text-6xl font-display font-bold text-primary dark:text-white tracking-tight mb-6">
+                Contacto
+              </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
                 ¿Desea transformar su estrategia de talento? Nuestro equipo está listo para escuchar sus desafíos y diseñar una solución de impacto.
               </p>
             </div>
-            
+
             <div className="space-y-8 mt-10">
+              {/* WhatsApp Channels */}
               <div className="flex items-start gap-4 group">
                 <div className="w-12 h-12 rounded-full bg-[#25d366]/10 flex items-center justify-center text-[#25d366] shrink-0 transition-transform group-hover:scale-110">
                   <svg className="w-6 h-6 fill-current" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
@@ -81,17 +93,17 @@ const Contact: React.FC = () => {
                 <div className="flex-1">
                   <h4 className="font-bold text-lg text-primary dark:text-white">Escríbanos</h4>
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">Atención vía WhatsApp por país:</p>
-                  
+
                   <div className="grid sm:grid-cols-2 gap-3 mt-2">
                     {/* Canal México */}
-                    <a 
+                    <a
                       className={`p-3 rounded-2xl border transition-all flex flex-col justify-between ${
-                        country === 'MX' 
-                          ? 'bg-[#25d366]/10 border-[#25d366]/40 shadow-sm' 
+                        country === 'MX'
+                          ? 'bg-[#25d366]/10 border-[#25d366]/40 shadow-sm'
                           : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#25d366]'
                       }`}
                       href={`https://wa.me/${contacts.MX.waNumber}?text=${encodeURIComponent(contacts.MX.defaultMessage)}`}
-                      target="_blank" 
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <div className="flex items-center justify-between gap-1 mb-1">
@@ -111,14 +123,14 @@ const Contact: React.FC = () => {
                     </a>
 
                     {/* Canal Argentina */}
-                    <a 
+                    <a
                       className={`p-3 rounded-2xl border transition-all flex flex-col justify-between ${
-                        country === 'AR' 
-                          ? 'bg-[#25d366]/10 border-[#25d366]/40 shadow-sm' 
+                        country === 'AR'
+                          ? 'bg-[#25d366]/10 border-[#25d366]/40 shadow-sm'
                           : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#25d366]'
                       }`}
                       href={`https://wa.me/${contacts.AR.waNumber}?text=${encodeURIComponent(contacts.AR.defaultMessage)}`}
-                      target="_blank" 
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <div className="flex items-center justify-between gap-1 mb-1">
@@ -134,17 +146,21 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
+              {/* Email */}
               <div className="flex items-start gap-4 group">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-110">
                   <span className="material-symbols-outlined">mail</span>
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-primary dark:text-white">Email Corporativo</h4>
-                  <a className="text-accent font-bold text-lg hover:underline block mt-1 transition-all" href="mailto:hola@apaxmanagement.com">hola@apaxmanagement.com</a>
+                  <a className="text-accent font-bold text-lg hover:underline block mt-1 transition-all" href="mailto:hola@apaxmanagement.com">
+                    hola@apaxmanagement.com
+                  </a>
                 </div>
               </div>
-              
+
+              {/* Ubicación */}
               <div className="flex items-start gap-4 group">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-110">
                   <span className="material-symbols-outlined">location_on</span>
@@ -165,114 +181,10 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
+          {/* Columna Derecha: Formulario */}
           <div className="bg-white dark:bg-slate-800 p-8 lg:p-12 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-2xl relative overflow-hidden h-full min-h-[500px] flex flex-col justify-center">
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
-            
+
             {status === 'success' ? (
-              <div className="text-center animate-fade-in-up">
-                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="material-symbols-outlined text-4xl">check</span>
-                </div>
-                <h3 className="text-2xl font-bold text-primary dark:text-white mb-2">¡Mensaje Enviado!</h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-8">
-                  Gracias por contactarnos. Hemos recibido su información correctamente en nuestro sistema y nos pondremos en contacto a la brevedad.
-                </p>
-                <button 
-                  onClick={() => setStatus('idle')}
-                  className="px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-white font-bold hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
-                >
-                  Enviar otro mensaje
-                </button>
-              </div>
-            ) : (
-              <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">Nombre</label>
-                    <input 
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className={inputClasses} 
-                      placeholder="Juan Pérez" 
-                      required 
-                      type="text"
-                      disabled={status === 'submitting'} 
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">Empresa</label>
-                    <input 
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className={inputClasses} 
-                      placeholder="Nombre de su empresa" 
-                      required 
-                      type="text"
-                      disabled={status === 'submitting'} 
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">Correo Electrónico</label>
-                  <input 
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={inputClasses} 
-                    placeholder="ejemplo@empresa.com" 
-                    required 
-                    type="email"
-                    disabled={status === 'submitting'} 
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-2 text-slate-700 dark:text-slate-300">Mensaje</label>
-                  <textarea 
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className={inputClasses} 
-                    placeholder="¿Cómo podemos potenciar su equipo?" 
-                    required 
-                    rows={4}
-                    disabled={status === 'submitting'}
-                  ></textarea>
-                </div>
-
-                {status === 'error' && (
-                  <div className="p-4 rounded-xl bg-red-50 text-red-600 text-sm font-medium flex items-center gap-2">
-                    <span className="material-symbols-outlined text-lg">error</span>
-                    Hubo un error al enviar. Por favor intente nuevamente.
-                  </div>
-                )}
-
-                <button 
-                  className="w-full btn-gradient text-white py-5 rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:opacity-95 transition-all transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-wait" 
-                  type="submit"
-                  disabled={status === 'submitting'}
-                >
-                  {status === 'submitting' ? (
-                    <>
-                      <span className="animate-spin material-symbols-outlined">progress_activity</span>
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      Enviar Mensaje
-                      <span className="material-symbols-outlined">send</span>
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Contact;
+              <div className="text
