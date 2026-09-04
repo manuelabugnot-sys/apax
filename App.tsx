@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -45,12 +44,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-slate-950">
       <Navbar onToggleDarkMode={toggleDarkMode} />
+      
       <main>
-        <Hero />
-        
         {/* Pilar 1: Quiénes Somos */}
+        <Hero />
         <About />
         
         {/* Diferencial */}
@@ -65,19 +64,22 @@ const App: React.FC = () => {
         {/* Programa Estratégico de Empleabilidad (B2C / Candidatos) */}
         <EmployabilityProgram />
 
-        {/* Sector Talento Apax & Formulario de Postulación de Candidatos */}
+        {/* Sector Talento Apax */}
         <TalentoApax />
         
-        {/* Innovation Lab (Movido aquí) */}
+        {/* Innovation Lab */}
         <AILab />
         
-        {/* Contacto */}
+        {/* Formulario de Contacto General */}
         <Contact />
       </main>
+
+      {/* El Footer es la última sección de la página */}
       <Footer />
+
+      {/* Elementos Flotantes de UI */}
       <FloatingWhatsApp />
 
-      {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
         className={`fixed bottom-10 left-10 w-12 h-12 bg-white dark:bg-slate-800 text-slate-800 dark:text-white rounded-full shadow-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-all duration-300 z-40 hover:scale-110 hover:-translate-y-1 ${showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
