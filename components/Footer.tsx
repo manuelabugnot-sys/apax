@@ -116,35 +116,134 @@ const Footer: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-4">
-                {/* Grupo: Servicios */}
-                <div className="space-y-2">
-                  <span className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
-                    Servicios
-                  </span>
-                  <ul className="space-y-2 pl-2.5 border-l-2 border-primary/20 dark:border-accent/20">
-                    <li>
+              <div className="space-y-3">
+                {/* Grupo: Servicios con detalle de especialidades */}
+                <div>
+                  <a 
+                    href="#servicios" 
+                    onClick={(e) => handleScrollTo(e, 'servicios')}
+                    className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 hover:text-primary dark:hover:text-white block transition-colors mb-2"
+                  >
+                    Servicios y Especialidades
+                  </a>
+                  <div className="space-y-3 pl-2.5 border-l-2 border-primary/20 dark:border-accent/20">
+                    <div>
                       <a 
-                        href="#servicios" 
-                        onClick={(e) => handleScrollTo(e, 'servicios')}
-                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                        href="#reclutamiento" 
+                        onClick={(e) => handleScrollTo(e, 'reclutamiento')}
+                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
                       >
-                        Soluciones para Empresas
+                        Reclutamiento y Selección
                       </a>
-                    </li>
-                    <li>
+                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
+                        <li>
+                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Selección IT & Tecnología</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Executive Search & C-Levels</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Mandos Medios & Especialistas</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Evaluaciones Psicotécnicas</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <a 
+                        href="#gestion" 
+                        onClick={(e) => handleScrollTo(e, 'gestion')}
+                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
+                      >
+                        Gestión del Talento
+                      </a>
+                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
+                        <li>
+                          <a href="#gestion" onClick={(e) => handleScrollTo(e, 'gestion')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Mapeo Nine Box & Sucesión</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#gestion" onClick={(e) => handleScrollTo(e, 'gestion')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Coaching & Mentoring Ejecutivo</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#gestion" onClick={(e) => handleScrollTo(e, 'gestion')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Clima & Cultura Laboral</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <a 
+                        href="#consultoria" 
+                        onClick={(e) => handleScrollTo(e, 'consultoria')}
+                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
+                      >
+                        Consultoría Estratégica
+                      </a>
+                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
+                        <li>
+                          <a href="#consultoria" onClick={(e) => handleScrollTo(e, 'consultoria')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Change Management</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#consultoria" onClick={(e) => handleScrollTo(e, 'consultoria')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Diseño Organizacional & KPIs</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
                       <a 
                         href="#empleabilidad" 
                         onClick={(e) => handleScrollTo(e, 'empleabilidad')}
-                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
                       >
                         Programa de Empleabilidad
                       </a>
-                    </li>
-                  </ul>
+                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
+                        <li>
+                          <a href="#empleabilidad" onClick={(e) => handleScrollTo(e, 'empleabilidad')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Optimización CV & LinkedIn</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#empleabilidad" onClick={(e) => handleScrollTo(e, 'empleabilidad')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
+                            <span className="w-1 h-1 rounded-full bg-accent"></span>
+                            <span>Simulacros de Entrevistas</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
 
-                <div>
+                <div className="pt-2">
                   <a 
                     href="#ai-lab" 
                     onClick={(e) => handleScrollTo(e, 'ai-lab')}
