@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const Footer: React.FC = () => {
@@ -19,13 +20,16 @@ const Footer: React.FC = () => {
           
           {/* Columna 1: Logo e Identidad */}
           <div className="space-y-6">
+            {/* Logo aumentado de tamaño (h-48) */}
             <div className="h-48 animate-float">
+              {/* Logo de color para modo Light */}
               <img 
                 src="logo-color.png" 
                 className="h-full w-auto object-contain block dark:hidden drop-shadow-lg" 
                 alt="Apax Management"
                 onError={(e) => {(e.target as HTMLImageElement).src = 'logo.png'}}
               />
+              {/* Logo blanco para modo Dark */}
               <img 
                 src="logo.png" 
                 className="h-full w-auto object-contain hidden dark:block drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]" 
@@ -37,6 +41,7 @@ const Footer: React.FC = () => {
               Potenciamos el talento de su organización mediante consultoría estratégica y un enfoque profundamente humano. Especialistas en soluciones integrales de Talento.
             </p>
             
+            {/* LinkedIn */}
             <div className="flex items-center">
               <a 
                 href="https://www.linkedin.com/company/apax-management/" 
@@ -73,6 +78,7 @@ const Footer: React.FC = () => {
                   </a>
                 </div>
 
+                {/* Grupo: Nuestra Empresa */}
                 <div className="space-y-2">
                   <span className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
                     Nuestra Empresa
@@ -108,6 +114,35 @@ const Footer: React.FC = () => {
                     Talento Apax
                   </a>
                 </div>
+              </div>
+
+              <div className="space-y-4">
+                {/* Grupo: Servicios */}
+                <div className="space-y-2">
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
+                    Servicios
+                  </span>
+                  <ul className="space-y-2 pl-2.5 border-l-2 border-primary/20 dark:border-accent/20">
+                    <li>
+                      <a 
+                        href="#servicios" 
+                        onClick={(e) => handleScrollTo(e, 'servicios')}
+                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                      >
+                        Servicios para Empresas
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#empleabilidad" 
+                        onClick={(e) => handleScrollTo(e, 'empleabilidad')}
+                        className="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors text-xs font-semibold block"
+                      >
+                        Programa de Empleabilidad
+                      </a>
+                    </li>
+                  </ul>
+                </div>
 
                 <div>
                   <a 
@@ -127,78 +162,6 @@ const Footer: React.FC = () => {
                   >
                     Contacto
                   </a>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div>
-                  <a 
-                    href="#servicios" 
-                    onClick={(e) => handleScrollTo(e, 'servicios')}
-                    className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 hover:text-primary dark:hover:text-white block transition-colors mb-2"
-                  >
-                    Servicios y Especialidades
-                  </a>
-                  <div className="space-y-3 pl-2.5 border-l-2 border-primary/20 dark:border-accent/20">
-                    <div>
-                      <a 
-                        href="#reclutamiento" 
-                        onClick={(e) => handleScrollTo(e, 'reclutamiento')}
-                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
-                      >
-                        Reclutamiento y Selección
-                      </a>
-                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Selección IT & Tecnología</li>
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Executive Search & C-Levels</li>
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Mandos Medios & Especialistas</li>
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Evaluaciones Psicotécnicas</li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <a 
-                        href="#gestion" 
-                        onClick={(e) => handleScrollTo(e, 'gestion')}
-                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
-                      >
-                        Gestión del Talento
-                      </a>
-                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Mapeo Nine Box & Sucesión</li>
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Coaching & Mentoring Ejecutivo</li>
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Clima & Cultura Laboral</li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <a 
-                        href="#consultoria" 
-                        onClick={(e) => handleScrollTo(e, 'consultoria')}
-                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
-                      >
-                        Consultoría Estratégica
-                      </a>
-                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Change Management</li>
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Diseño Organizacional & KPIs</li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <a 
-                        href="#empleabilidad" 
-                        onClick={(e) => handleScrollTo(e, 'empleabilidad')}
-                        className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-white transition-colors text-xs font-bold block"
-                      >
-                        Programa de Empleabilidad
-                      </a>
-                      <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Optimización CV & LinkedIn</li>
-                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Simulacros de Entrevistas</li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
