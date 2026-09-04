@@ -1,10 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
 
+interface SubServiceItem {
+  name: string;
+  desc: string;
+}
+
 interface ServiceDetail {
   id: string;
   title: string;
   fullDesc: string;
+  subServices: SubServiceItem[];
   methodology: string[];
   benefits: string[];
   icon: string;
@@ -18,6 +24,12 @@ const servicesData: ServiceDetail[] = [
     icon: "person_search",
     img: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Identificamos las piezas fundamentales para su cultura organizacional. Utilizamos metodologías de Headhunting 4.0 y Human-Centric Sourcing para asegurar compatibilidad técnica y valórica de excelencia.",
+    subServices: [
+      { name: "Selección IT & Tecnología", desc: "Desarrollo de software, Data, DevOps, Cloud, Ciberseguridad, QA y Tech Leads." },
+      { name: "Executive Search", desc: "Búsquedas confidenciales de C-Levels, Directores y Gerencias Estratégicas." },
+      { name: "Mandos Medios & Especialistas", desc: "Líderes de equipo para Finanzas, Operaciones, Ventas, Marketing y RRHH." },
+      { name: "Evaluaciones Psicotécnicas", desc: "Psicodiagnóstico laboral, medición de competencias y fit cultural exhaustivo." }
+    ],
     methodology: [
       "Headhunting 4.0: Búsqueda proactiva en redes globales y mapeo de mercado.",
       "Entrevistas por competencias y evaluación de fit cultural.",
@@ -37,6 +49,12 @@ const servicesData: ServiceDetail[] = [
     icon: "psychology",
     img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Cuidamos su activo más valioso mediante programas de desarrollo que potencian las capacidades actuales y preparan a su equipo para los desafíos del futuro mediante mapeo y planes de carrera motivadores.",
+    subServices: [
+      { name: "Mapeo de Talento & Nine Box", desc: "Identificación de High Potentials (HiPo), matriz de desempeño y planes de sucesión." },
+      { name: "Coaching & Mentoring Ejecutivo", desc: "Desarrollo de líderes y mandos medios con visión transformadora y humana." },
+      { name: "Planes de Carrera & Fidelización", desc: "Rutas de crecimiento que retienen el talento clave e incrementan la motivación." },
+      { name: "Clima Organizacional & Engagement", desc: "Diagnóstico profundo de cultura, bienestar y encuestas de satisfacción con planes de acción." }
+    ],
     methodology: [
       "Mapeo de Talento para identificar líderes y competencias críticas.",
       "Programas de Mentoring y Coaching Ejecutivo personalizado.",
@@ -55,6 +73,12 @@ const servicesData: ServiceDetail[] = [
     icon: "hub",
     img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070",
     fullDesc: "Alineamos su arquitectura de RRHH con los objetivos de negocio. Transformamos la estructura organizacional para que sea ágil, eficiente y humana, impactando directamente en los resultados de la empresa.",
+    subServices: [
+      { name: "Change Management", desc: "Acompañamiento en procesos de transformación digital, cultural y fusiones." },
+      { name: "Diseño Organizacional & Organigramas", desc: "Reestructuración ágil, descripción de puestos y manuales de roles claros." },
+      { name: "Políticas de Compensaciones & Beneficios", desc: "Equidad interna, benchmarking salarial y arquitectura de salario emocional." },
+      { name: "People Analytics & KPIs", desc: "Tableros de control y métricas basadas en datos para optimizar decisiones de RRHH." }
+    ],
     methodology: [
       "Gestión del cambio ante transformaciones y crecimiento organizacional.",
       "Análisis profundo de clima, cultura y diagnóstico de procesos.",
@@ -95,12 +119,32 @@ const ServiceCard: React.FC<{
       <div className="w-14 h-14 bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white mb-6 border border-white/25 shadow-lg group-hover:bg-[#9d4edd]/40 group-hover:border-white/40 transition-all duration-300">
         <span className="material-symbols-outlined text-3xl">{service.icon}</span>
       </div>
-      <h3 className="text-2xl font-bold mb-4 drop-shadow-sm text-white">{service.title}</h3>
-      <p className="text-white/95 dark:text-white/90 mb-8 leading-relaxed line-clamp-3 text-sm sm:text-base drop-shadow">
+      <h3 className="text-2xl font-bold mb-3 drop-shadow-sm text-white">{service.title}</h3>
+      <p className="text-white/95 dark:text-white/90 mb-6 leading-relaxed line-clamp-2 text-sm drop-shadow">
         {service.fullDesc}
       </p>
-      <div className="mt-auto inline-flex items-center gap-2 font-bold text-white group-hover:gap-4 transition-all drop-shadow">
-        <span>Saber Más</span>
+
+      {/* Subservicios y especialidades en la tarjeta */}
+      <div className="mb-6 space-y-2">
+        <div className="text-[11px] uppercase tracking-wider font-extrabold text-violet-200 drop-shadow-sm flex items-center gap-1.5">
+          <span className="material-symbols-outlined text-xs">tune</span>
+          <span>Especialidades incluidas:</span>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {service.subServices.map((sub, idx) => (
+            <span 
+              key={idx}
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/25 text-white shadow-sm transition-colors"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c77dff]"></span>
+              {sub.name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-auto inline-flex items-center gap-2 font-bold text-white group-hover:gap-4 transition-all drop-shadow pt-2 border-t border-white/15">
+        <span>Saber Más y Metodología</span>
         <span className="material-symbols-outlined text-lg">arrow_forward</span>
       </div>
     </div>
@@ -176,10 +220,34 @@ const Services: React.FC = () => {
 
               <div className="space-y-8">
                 <div>
-                  <h5 className="text-xs font-black uppercase tracking-widest text-primary dark:text-[#c77dff] mb-4">Visión Apax</h5>
+                  <h5 className="text-xs font-black uppercase tracking-widest text-primary dark:text-[#c77dff] mb-3">Visión Apax</h5>
                   <p className="text-lg text-slate-700 dark:text-slate-200 leading-relaxed">
                     {selectedService.fullDesc}
                   </p>
+                </div>
+
+                {/* Especialidades y Servicios Específicos */}
+                <div>
+                  <h5 className="text-xs font-black uppercase tracking-widest text-primary dark:text-[#c77dff] mb-3 flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-sm">tune</span>
+                    <span>Servicios y Especialidades Incluidas</span>
+                  </h5>
+                  <div className="grid sm:grid-cols-2 gap-3.5">
+                    {selectedService.subServices.map((sub, i) => (
+                      <div 
+                        key={i} 
+                        className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/70 dark:border-white/10 flex flex-col justify-start hover:border-primary/40 dark:hover:border-accent/40 transition-colors"
+                      >
+                        <div className="flex items-center gap-2 font-bold text-sm text-primary dark:text-white">
+                          <span className="material-symbols-outlined text-base text-accent dark:text-[#c77dff]">check_circle</span>
+                          <span>{sub.name}</span>
+                        </div>
+                        <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 pl-6 leading-relaxed">
+                          {sub.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
