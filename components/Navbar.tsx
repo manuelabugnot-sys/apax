@@ -106,20 +106,23 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
             { 
               name: 'Reclutamiento y Selección', 
               id: 'reclutamiento', 
-              desc: 'Headhunting y selección cultural',
-              icon: 'person_search'
+              desc: 'Selección IT, Executive Search, Mandos Medios y Psicotécnicos',
+              icon: 'person_search',
+              specialties: ['Selección IT', 'Executive Search', 'Mandos Medios', 'Psicotécnicos']
             },
             { 
               name: 'Gestión del Talento', 
               id: 'gestion', 
-              desc: 'Mapeo de talento y planes de carrera',
-              icon: 'psychology'
+              desc: 'Mapeo de talento, planes de carrera, coaching y clima',
+              icon: 'psychology',
+              specialties: ['Mapeo Nine Box', 'Coaching Ejecutivo', 'Clima Laboral']
             },
             { 
               name: 'Consultoría Estratégica', 
               id: 'consultoria', 
-              desc: 'Estructuras y KPIs de RRHH',
-              icon: 'hub'
+              desc: 'Change Management, diseño organizacional y KPIs',
+              icon: 'hub',
+              specialties: ['Change Management', 'Diseño Org', 'KPIs RRHH']
             }
           ]
         },
@@ -392,9 +395,18 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
                                       <span>{sub.name}</span>
                                       <span className="material-symbols-outlined text-xs opacity-0 group-hover/item:opacity-100 transition-opacity">arrow_forward</span>
                                     </div>
-                                    <div className="text-[11px] text-white/70 leading-tight mt-0.5 truncate">
+                                    <div className="text-[11px] text-white/70 leading-tight mt-0.5">
                                       {sub.desc}
                                     </div>
+                                    {'specialties' in sub && Array.isArray((sub as any).specialties) && (
+                                      <div className="flex flex-wrap gap-1 mt-1.5">
+                                        {(sub as any).specialties.map((spec: string, sIdx: number) => (
+                                          <span key={sIdx} className="text-[9.5px] bg-white/15 px-1.5 py-0.5 rounded text-violet-100 font-medium tracking-tight">
+                                            {spec}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    )}
                                   </div>
                                 </a>
                               ))}
@@ -525,6 +537,15 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleDarkMode }) => {
                               <div className="flex-1">
                                 <div>{sub.name}</div>
                                 <div className="text-[10px] text-white/60 font-normal">{sub.desc}</div>
+                                {'specialties' in sub && Array.isArray((sub as any).specialties) && (
+                                  <div className="flex flex-wrap gap-1 mt-1">
+                                    {(sub as any).specialties.map((spec: string, sIdx: number) => (
+                                      <span key={sIdx} className="text-[9px] bg-white/15 px-1.5 py-0.5 rounded text-violet-100 font-medium">
+                                        {spec}
+                                      </span>
+                                    ))}
+                                  </div>
+                                )}
                               </div>
                             </a>
                           ))}
