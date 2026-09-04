@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Footer: React.FC = () => {
@@ -20,16 +19,13 @@ const Footer: React.FC = () => {
           
           {/* Columna 1: Logo e Identidad */}
           <div className="space-y-6">
-            {/* Logo aumentado de tamaño (h-48) */}
             <div className="h-48 animate-float">
-              {/* Logo de color para modo Light */}
               <img 
                 src="logo-color.png" 
                 className="h-full w-auto object-contain block dark:hidden drop-shadow-lg" 
                 alt="Apax Management"
                 onError={(e) => {(e.target as HTMLImageElement).src = 'logo.png'}}
               />
-              {/* Logo blanco para modo Dark */}
               <img 
                 src="logo.png" 
                 className="h-full w-auto object-contain hidden dark:block drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]" 
@@ -41,7 +37,6 @@ const Footer: React.FC = () => {
               Potenciamos el talento de su organización mediante consultoría estratégica y un enfoque profundamente humano. Especialistas en soluciones integrales de Talento.
             </p>
             
-            {/* LinkedIn */}
             <div className="flex items-center">
               <a 
                 href="https://www.linkedin.com/company/apax-management/" 
@@ -78,7 +73,6 @@ const Footer: React.FC = () => {
                   </a>
                 </div>
 
-                {/* Grupo: Nuestra Empresa */}
                 <div className="space-y-2">
                   <span className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
                     Nuestra Empresa
@@ -114,10 +108,29 @@ const Footer: React.FC = () => {
                     Talento Apax
                   </a>
                 </div>
+
+                <div>
+                  <a 
+                    href="#ai-lab" 
+                    onClick={(e) => handleScrollTo(e, 'ai-lab')}
+                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
+                  >
+                    AI Lab
+                  </a>
+                </div>
+
+                <div>
+                  <a 
+                    href="#contacto" 
+                    onClick={(e) => handleScrollTo(e, 'contacto')}
+                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
+                  >
+                    Contacto
+                  </a>
+                </div>
               </div>
 
               <div className="space-y-3">
-                {/* Grupo: Servicios con detalle de especialidades */}
                 <div>
                   <a 
                     href="#servicios" 
@@ -136,30 +149,10 @@ const Footer: React.FC = () => {
                         Reclutamiento y Selección
                       </a>
                       <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li>
-                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Selección IT & Tecnología</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Executive Search & C-Levels</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Mandos Medios & Especialistas</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#reclutamiento" onClick={(e) => handleScrollTo(e, 'reclutamiento')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Evaluaciones Psicotécnicas</span>
-                          </a>
-                        </li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Selección IT & Tecnología</li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Executive Search & C-Levels</li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Mandos Medios & Especialistas</li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Evaluaciones Psicotécnicas</li>
                       </ul>
                     </div>
 
@@ -172,24 +165,9 @@ const Footer: React.FC = () => {
                         Gestión del Talento
                       </a>
                       <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li>
-                          <a href="#gestion" onClick={(e) => handleScrollTo(e, 'gestion')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Mapeo Nine Box & Sucesión</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#gestion" onClick={(e) => handleScrollTo(e, 'gestion')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Coaching & Mentoring Ejecutivo</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#gestion" onClick={(e) => handleScrollTo(e, 'gestion')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Clima & Cultura Laboral</span>
-                          </a>
-                        </li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Mapeo Nine Box & Sucesión</li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Coaching & Mentoring Ejecutivo</li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Clima & Cultura Laboral</li>
                       </ul>
                     </div>
 
@@ -202,18 +180,8 @@ const Footer: React.FC = () => {
                         Consultoría Estratégica
                       </a>
                       <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li>
-                          <a href="#consultoria" onClick={(e) => handleScrollTo(e, 'consultoria')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Change Management</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#consultoria" onClick={(e) => handleScrollTo(e, 'consultoria')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Diseño Organizacional & KPIs</span>
-                          </a>
-                        </li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Change Management</li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Diseño Organizacional & KPIs</li>
                       </ul>
                     </div>
 
@@ -226,41 +194,11 @@ const Footer: React.FC = () => {
                         Programa de Empleabilidad
                       </a>
                       <ul className="mt-1 space-y-1 pl-2 text-[11px] text-slate-500 dark:text-slate-400">
-                        <li>
-                          <a href="#empleabilidad" onClick={(e) => handleScrollTo(e, 'empleabilidad')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Optimización CV & LinkedIn</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#empleabilidad" onClick={(e) => handleScrollTo(e, 'empleabilidad')} className="hover:text-primary dark:hover:text-accent transition-colors flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-accent"></span>
-                            <span>Simulacros de Entrevistas</span>
-                          </a>
-                        </li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Optimización CV & LinkedIn</li>
+                        <li className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-accent"></span>Simulacros de Entrevistas</li>
                       </ul>
                     </div>
                   </div>
-                </div>
-
-                <div className="pt-2">
-                  <a 
-                    href="#ai-lab" 
-                    onClick={(e) => handleScrollTo(e, 'ai-lab')}
-                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
-                  >
-                    AI Lab
-                  </a>
-                </div>
-
-                <div>
-                  <a 
-                    href="#contacto" 
-                    onClick={(e) => handleScrollTo(e, 'contacto')}
-                    className="text-slate-700 dark:text-slate-200 hover:text-primary dark:hover:text-accent transition-colors text-sm font-bold block"
-                  >
-                    Contacto
-                  </a>
                 </div>
               </div>
             </div>
